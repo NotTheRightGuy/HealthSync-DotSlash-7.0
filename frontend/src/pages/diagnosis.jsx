@@ -5,7 +5,7 @@ import medDoc from '../assets/Medical Doctor.svg';
 import { useEffect, useState } from "react";
 
 export default function Diagnosis(props) {
-    const [diagnosis, setDiagnosis] = useState(true)
+    const [diagnosis, setDiagnosis] = useState([])
 
     const [loggedIn, setLoggedIn] = useState(false)
 
@@ -33,7 +33,7 @@ export default function Diagnosis(props) {
             />
 
             {
-                diagnosis === true ?
+               (diagnosis.length > 0) ?
                 <div className="">
                     <DiagnosisWithContent 
 
