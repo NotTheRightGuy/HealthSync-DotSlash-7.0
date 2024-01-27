@@ -116,6 +116,10 @@ const DiagnosisForm = () => {
                             variant="filled"
                             bg="#1C1C1E"
                             _hover={{ bg: "#2d2d30" }}
+                            style={{
+                                fontFamily: "Inter",
+                                fontSize: "12px",
+                            }}
                             className="resize-none"
                         />
                     </section>

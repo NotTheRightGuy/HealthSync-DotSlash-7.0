@@ -1,21 +1,20 @@
-import { useState } from "react"
-import Diagnosis from "../pages/diagnosis"
+import { useState } from "react";
+import Diagnosis from "../pages/diagnosis";
 import MenuVertical from "../assets/Menu Vertical.png";
 import { useNavigate } from "react-router-dom";
+import { CiMenuKebab } from "react-icons/ci";
 // import Gears from '../assets/Gears.png';
 
-export default function PatientDashboardNavbar(props){
-
-    const [currComponent,setCurrComponent] = useState("Diagnosis")
+export default function PatientDashboardNavbar(props) {
+    const [currComponent, setCurrComponent] = useState("Diagnosis");
     const navigate = useNavigate();
-    console.log(currComponent,"curr")
-    console.log(props.currPage,"page")
+    console.log(currComponent, "curr");
+    console.log(props.currPage, "page");
 
     const changeComponent = (e) => {
-
-        console.log(e.target.attributes.name)
-        navigate(e.target.attributes.name.value)
-    }
+        console.log(e.target.attributes.name);
+        navigate(e.target.attributes.name.value);
+    };
 
     return (
         <div className="">
@@ -26,17 +25,24 @@ export default function PatientDashboardNavbar(props){
                         <span className="font-medium">Sync </span>
                     </div>
                 </a>
-                
+
                 <div className="flex gap-8 text-base">
-                    {
-                        props.links.map((link) => {
-                            return(
-                                <div key={link.path} className={props.currPage === link.name ? "font-medium text-white h-fit cursor-pointer " : "text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "} onClick={changeComponent} name={link.path}>
-                                    {link.name}
-                                </div>
-                            )
-                        })
-                    }
+                    {props.links.map((link) => {
+                        return (
+                            <div
+                                key={link.path}
+                                className={
+                                    props.currPage === link.name
+                                        ? "font-medium text-white h-fit cursor-pointer "
+                                        : "text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "
+                                }
+                                onClick={changeComponent}
+                                name={link.path}
+                            >
+                                {link.name}
+                            </div>
+                        );
+                    })}
                 </div>
                 <div className="user">
                     {/* <div className="flex gap-2 items-center">
@@ -55,20 +61,12 @@ export default function PatientDashboardNavbar(props){
                             <div className="font-medium opacity-65">
                                 Janmejay Chatterjee
                             </div>
-                            <div className="flex flex-col gap-1 -translate-y-7 opacity-50 hover:opacity-100 hover:cursor-pointer">
-                                <div className="h-[4px] text-4xl">.</div>
-                                <div className="h-[4px] text-4xl">.</div>
-                                <div className="h-[4px] text-4xl">.</div>
-                                {/* <div>.</div> */}
-                                {/* <div>.</div> */}
-                                {/* <img src={MenuVertical} alt="" /> */}
-                            </div>
+                            <CiMenuKebab className="text-secondary" />
                         </div>
                     </div>
                 </div>
             </div>
             <hr className="border-0 border-t-2 border-[#0f0f11]" />
-
         </div>
-    )   
+    );
 }
