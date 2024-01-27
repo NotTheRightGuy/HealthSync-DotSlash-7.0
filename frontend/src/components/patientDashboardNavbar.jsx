@@ -55,7 +55,7 @@ export default function PatientDashboardNavbar(props){
                             <div className="font-medium opacity-65">
                                 Janmejay Chatterjee
                             </div>
-                            <div className="flex flex-col gap-1 -translate-y-7 opacity-50 hover:opacity-100 hover:cursor-pointer">
+                            <div className="flex flex-col gap-1 -translate-y-8 opacity-50 hover:opacity-100 hover:cursor-pointer">
                                 <div className="h-[4px] text-4xl">.</div>
                                 <div className="h-[4px] text-4xl">.</div>
                                 <div className="h-[4px] text-4xl">.</div>
