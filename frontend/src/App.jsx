@@ -5,6 +5,7 @@ import Prescriptions from "./pages/prescriptions";
 import YourDoctor from "./pages/yourDoctor";
 import AIChatbot from "./pages/AIChatbot";
 import DiagnosisForm from "./pages/DiagnosisForm";
+import DiagnosisResult from "./pages/DiagnosisResult";
 
 import { RecoilRoot } from "recoil";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -41,6 +42,10 @@ function App() {
                             <Route
                                 path="/patientDashboard/diagnosis-form"
                                 element={<DiagnosisForm />}
+                            ></Route>
+                            <Route
+                                path="/patientDashboard/diagnosis-result"
+                                element={<DiagnosisResult />}
                             ></Route>
                         </Routes>
                     </Router>
