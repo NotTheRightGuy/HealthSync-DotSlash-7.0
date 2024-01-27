@@ -7,6 +7,10 @@ import AIChatbot from "./pages/AIChatbot";
 import DiagnosisForm from "./pages/DiagnosisForm";
 import DiagnosisResult from "./pages/DiagnosisResult";
 import Home from "./pages/home";
+import Login from "./pages/login.jsx";
+import Signup from "./pages/signup.jsx";
+import DoctorDashboardPatients from "./pages/doctorDashboardPatients.jsx";
+import DoctorDashboardArticles from "./pages/doctorDashboardArticles.jsx";
 
 import { RecoilRoot } from "recoil";
 import { ChakraProvider } from "@chakra-ui/react";
