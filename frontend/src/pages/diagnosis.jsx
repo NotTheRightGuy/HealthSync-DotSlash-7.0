@@ -21,7 +21,9 @@ export default function Diagnosis(props) {
             {
                 diagnosis === true ?
                 <div className="">
-                    <DiagnosisWithContent />
+                    <DiagnosisWithContent 
+
+                    />
                 </div>
                      : 
                 <div className="flex flex-col gap-12 justify-center items-center text-xs h-5/6 font-medium">

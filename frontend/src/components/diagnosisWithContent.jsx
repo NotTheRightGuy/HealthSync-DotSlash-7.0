@@ -4,9 +4,8 @@ export default function DiagnosisWithContent(){
     const [allDiagnosis, setAllDiagnosis] = useState([])
 
     return(
-        <div className="">
         <div className="grid grid-cols-4 p-10 justify-items-center gap-10 bg-black ">
-            {
+            {/* {
                 allDiagnosis.map(
                     (diagnosis) => {
                         <patientDiagnosisCard
@@ -15,10 +14,11 @@ export default function DiagnosisWithContent(){
                         symptoms = {diagnosis.symptoms}
                         doctorsRemark = {diagnosis.doctorsRemark}
                             severity = {diagnosis.severity}
-                        />
-                    }
-                )
-            }
+                            />
+                        }
+                        
+                        )
+                    } */}
 
             <PatientDiagnosisCard
                 disease = "Dengue"
@@ -77,7 +77,6 @@ export default function DiagnosisWithContent(){
                 visit = "false"
             />
 
-        </div>
         </div>
     )
 }
