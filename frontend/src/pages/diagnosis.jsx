@@ -5,7 +5,7 @@ import medDoc from '../assets/Medical Doctor.svg';
 import { useState } from "react";
 
 export default function Diagnosis(props) {
-    const [diagnosis, setDiagnosis] = useState(false)
+    const [diagnosis, setDiagnosis] = useState(true)
     return (
         <div className="h-full ">
             <PatientDashboardNavbar

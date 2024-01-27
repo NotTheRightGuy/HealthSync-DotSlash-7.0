@@ -1,5 +1,5 @@
 import PatientDashboardNavbar from "../components/patientDashboardNavbar"
-import finDocs from '../assets/financial documents.png';
+import finDocs from '../assets/financial documents.svg';
 import { useState } from "react";
 import PrescriptionContent from "../components/prescriptionContent";
 

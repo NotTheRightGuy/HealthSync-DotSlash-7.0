@@ -19,17 +19,19 @@ export default function PatientDashboardNavbar(props){
 
     return (
         <div className="">
-            <div className="flex justify-between px-8 py-3 font-normal items-center">
-                <div className="font-bricolage text-2xl ">
-                    Health
-                    <span className="font-medium">Sync </span>
-                </div>
+            <div className="flex justify-between px-10 py-3 font-normal items-center">
+                <a href="/">
+                    <div className="font-bricolage text-2xl cursor-pointer">
+                        Health
+                        <span className="font-medium">Sync </span>
+                    </div>
+                </a>
                 
                 <div className="flex gap-8 text-base">
                     {
                         props.links.map((link) => {
                             return(
-                                <div key={link.path} className={props.currPage === link.name ? "font-medium text-white h-fit " : "text-gray-400 hover:text-white h-fit cursor-pointer "} onClick={changeComponent} name={link.path}>
+                                <div key={link.path} className={props.currPage === link.name ? "font-medium text-white h-fit cursor-pointer " : "text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "} onClick={changeComponent} name={link.path}>
                                     {link.name}
                                 </div>
                             )
@@ -46,19 +48,19 @@ export default function PatientDashboardNavbar(props){
                         </div>
                     </div> */}
                     <div className="flex p-3 rounded-2xl border-2 border-[#0f0f11]">
-                        <div className="flex gap-2 items-center">
+                        <div className="flex gap-5 items-center">
                             <div className="rounded-2xl bg-gray-300">
-                                {
-                                    props.userImage === true ?
-                                    <img src={props.userImage} alt="userImage" /> 
-                                    : <div className=" h-10 w-10 bg-gradient-to-[#D9D9D9] from-[#D13636] "></div>
-                                }
+                                <div className="h-10 w-10 bg-gradient-to-b from-[#d13636] to-[#d9d9d9] rounded-xl"></div>
                             </div>
                             <div className="font-medium opacity-65">
                                 Janmejay Chatterjee
                             </div>
-                            <div className="flex flex-col h-min">
-                                ...
+                            <div className="flex flex-col gap-1 -translate-y-7 opacity-50 hover:opacity-100 hover:cursor-pointer">
+                                <div className="h-[4px] text-4xl">.</div>
+                                <div className="h-[4px] text-4xl">.</div>
+                                <div className="h-[4px] text-4xl">.</div>
+                                {/* <div>.</div> */}
+                                {/* <div>.</div> */}
                                 {/* <img src={MenuVertical} alt="" /> */}
                             </div>
                         </div>

@@ -6,6 +6,7 @@ import YourDoctor from "./pages/yourDoctor";
 import AIChatbot from "./pages/AIChatbot";
 import DiagnosisForm from "./pages/DiagnosisForm";
 import DiagnosisResult from "./pages/DiagnosisResult";
+import Home from "./pages/home";
 
 import { RecoilRoot } from "recoil";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -17,7 +18,7 @@ function App() {
                 <div className="bg-black text-white h-screen">
                     <Router>
                         <Routes>
-                            {/* <Route path="/" element={<Home/>}  ></Route> */}
+                            <Route path="/" element={<Home />}></Route>
                             {/* <Route path="/features" element={<Features/>}  ></Route> */}
                             <Route
                                 path="/patientDashboard"
