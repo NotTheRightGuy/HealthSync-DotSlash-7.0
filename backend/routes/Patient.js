@@ -128,10 +128,13 @@ app.post("/upload-prescription", checkPatient, (req, res) => {
             message: "Prescription not found",
         });
     }
+
+    const extension = prescription_path.split(".").pop();
+
     supabase.storage
         .from("prescriptions")
         .upload(
-            `prescriptions/${patientID}/${prescription_name}`,
+            `prescriptions/${patientID}/${prescription_name}${Date.now()}.${extension}`,
             prescription_path
         )
         .then((data) => {
