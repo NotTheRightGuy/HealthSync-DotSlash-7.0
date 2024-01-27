@@ -7,6 +7,9 @@ export default {
                 inter: ["Inter", "sans-serif"],
                 bricolage: ["Bricolage Grotesque", "sans-serif"],
             },
+            colors: {
+                secondary: "#52525C",
+            },
         },
     },
     plugins: [],
