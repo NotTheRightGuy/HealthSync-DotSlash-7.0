@@ -5,7 +5,12 @@ import Prescriptions from "./pages/prescriptions";
 import YourDoctor from "./pages/yourDoctor";
 import AIChatbot from "./pages/AIChatbot";
 import DiagnosisForm from "./pages/DiagnosisForm";
+import DiagnosisResult from "./pages/DiagnosisResult";
 import Home from "./pages/home";
+import Login from "./pages/login.jsx";
+import Signup from "./pages/signup.jsx";
+import DoctorDashboardPatients from "./pages/doctorDashboardPatients.jsx";
+import DoctorDashboardArticles from "./pages/doctorDashboardArticles.jsx";
 
 import { RecoilRoot } from "recoil";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -14,14 +19,10 @@ function App() {
     return (
         <RecoilRoot>
             <ChakraProvider>
-                <div className="bg-black text-white h-screen">
+                <div className="bg-black text-white h-screen font-bricolage">
                     <Router>
                         <Routes>
                             <Route path="/" element={<Home/>}  ></Route>
-                            {/* <Route
-                                path="/patientDashboard"
-                                element={<PatientDashboard />}
-                            ></Route> */}
                             <Route
                                 path="/patientDashboard/diagnosis"
                                 element={<Diagnosis />}
@@ -41,6 +42,26 @@ function App() {
                             <Route
                                 path="/patientDashboard/diagnosis-form"
                                 element={<DiagnosisForm />}
+                            ></Route>
+                            <Route
+                                path="/patientDashboard/diagnosis-result"
+                                element={<DiagnosisResult />}
+                            ></Route>
+                            <Route
+                                path="/login"
+                                element={<Login />}
+                            ></Route>
+                            <Route
+                                path="/signup"
+                                element={<Signup />}
+                            ></Route>
+                            <Route
+                                path="/doctorDashboard/patients"
+                                element={<DoctorDashboardPatients />}
+                            ></Route>
+                            <Route
+                                path="/doctorDashboard/articles"
+                                element={<DoctorDashboardArticles/>}
                             ></Route>
                         </Routes>
                     </Router>

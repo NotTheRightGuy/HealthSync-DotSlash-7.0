@@ -2,10 +2,24 @@ import DiagnosisWithContent from "../components/diagnosisWithContent"
 import PatientDashboardNavbar from "../components/patientDashboardNavbar"
 import Gears from '../assets/Gears.svg';
 import medDoc from '../assets/Medical Doctor.svg';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Diagnosis(props) {
     const [diagnosis, setDiagnosis] = useState(true)
+
+    const [loggedIn, setLoggedIn] = useState(false)
+
+    useEffect(()=>{
+        fetch(`http://localhost:5000/patient/${props.currPatientId}/diagnosis`)
+        .then(res => res.json())
+        .then(data => {
+            setDiagnosis(data)
+        })
+        .catch(err =>{ 
+            console.log(err)
+        })
+    })
+
     return (
         <div className="h-full ">
             <PatientDashboardNavbar

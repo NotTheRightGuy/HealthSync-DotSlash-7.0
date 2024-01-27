@@ -55,7 +55,7 @@ export default function DoctorDetails(props){
                         <div className="opacity-50 text-sm ml-3 mt-2">with mostly positive reviews</div>
                     </div>
                     <div className="w-1/3 bg-[#0f0f11] p-5 border-2 border-[#27272a] rounded-2xl ">
-                        <ul className="text-3xl font-semibold">Experts In</ul>
+                        <ul className="text-3xl font-semibold">Expert In</ul>
                         {
                             currDoctor.expertIn.map((expertise) => {
                                 return(

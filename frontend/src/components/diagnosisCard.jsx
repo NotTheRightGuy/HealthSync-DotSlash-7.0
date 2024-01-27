@@ -40,17 +40,17 @@ export default function DiagnosisCard(props){
             </div>
             <hr className="opacity-50" />
             <div className="px-6 py-3">
-                <p className="text-xs font-medium opacity-75 ">Diagnosed on {diagnosis.date}</p>
+                <p className="text-xs font-medium opacity-75  font-inter">Diagnosed on {diagnosis.date}</p>
                 <ul className="mt-2 mb-4 text-white">Listed Symptoms</ul>
 
                 {diagnosis.symptoms.map((symptom) => {
                     return(
-                        <li className="text-sm opacity-75 px-2" key={symptom}>{symptom}</li>
+                        <li className="text-sm opacity-75 px-2 font-inter" key={symptom}>{symptom}</li>
                     )
                 })}
 
                 <p className={"text-xl font-medium mt-10 text-white"}>Doctor's Remark</p>
-                <p className={`text-sm `+ `text-`+severityColor}>{diagnosis.remark}</p>
+                <p className={`text-sm font-inter text-`+severityColor}>{diagnosis.remark}</p>
             </div>
 
         </div>
