@@ -1,25 +1,27 @@
-import { useState } from "react"
-import Diagnosis from "../pages/diagnosis"
-import MenuVertical from "../assets/Menu Vertical.png";
-import { useNavigate } from "react-router-dom";
-// import Gears from '../assets/Gears.png';
+import { useEffect } from "react";
 
-export default function PatientDashboardNavbar(props){
+export default function heroNavbar(){
 
-    const [currComponent,setCurrComponent] = useState("Diagnosis")
-    const navigate = useNavigate();
-    console.log(currComponent,"curr")
-    console.log(props.currPage,"page")
+    const [currUser,setCurrUser] = useState({})
+    const [loggedIn,setLoggedIn] = useState(false)
 
-    const changeComponent = (e) => {
+    useEffect(() => {
+        fetch("http://localhost:5000/api/v1/users/1")
+        .then((res) => res.json())
+        .then((data) => {
+            setCurrUser(data)
+            // document.cookie = "LOGIN_INFO=" + 
+        })
+    }, [])
 
-        console.log(e.target.attributes.name)
-        navigate(e.target.attributes.name.value)
+    const scrollToComponent = (e) => {
+        e.preventDefault();
+        console.log("scroll To component ")
     }
 
-    return (
+    return(
         <div className="">
-            <div className="flex justify-between px-10 py-3 font-normal items-center">
+            <div className="flex justify-between px-8 py-3 font-normal items-center">
                 <a href="/">
                     <div className="font-bricolage text-2xl cursor-pointer">
                         Health
@@ -28,15 +30,21 @@ export default function PatientDashboardNavbar(props){
                 </a>
                 
                 <div className="flex gap-8 text-base">
-                    {
-                        props.links.map((link) => {
-                            return(
-                                <div key={link.path} className={props.currPage === link.name ? "font-medium text-white h-fit cursor-pointer " : "text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "} onClick={changeComponent} name={link.path}>
-                                    {link.name}
-                                </div>
-                            )
-                        })
-                    }
+                        <div className={"font-medium text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "} onClick={scrollToComponent} >
+                            Home
+                        </div>
+                        <div className={"font-medium text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "} onClick={scrollToComponent} >
+                            Features
+                        </div>
+                        <div className={"font-medium text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "} onClick={scrollToComponent} >
+                            Mission
+                        </div>
+                        <div className={"font-medium text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "} onClick={scrollToComponent} >
+                            FAQs
+                        </div>
+                        <div className={"font-medium text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "} onClick={scrollToComponent} >
+                            <Github></Github>
+                        </div>
                 </div>
                 <div className="user">
                     {/* <div className="flex gap-2 items-center">
@@ -53,6 +61,7 @@ export default function PatientDashboardNavbar(props){
                                 <div className="h-10 w-10 bg-gradient-to-b from-[#d13636] to-[#d9d9d9] rounded-xl"></div>
                             </div>
                             <div className="font-medium opacity-65">
+                                {/* {currUser.fullName} */}
                                 Janmejay Chatterjee
                             </div>
                             <div className="flex flex-col gap-1 -translate-y-7 opacity-50 hover:opacity-100 hover:cursor-pointer">
@@ -70,5 +79,5 @@ export default function PatientDashboardNavbar(props){
             <hr className="border-0 border-t-2 border-[#0f0f11]" />
 
         </div>
-    )   
+    )
 }

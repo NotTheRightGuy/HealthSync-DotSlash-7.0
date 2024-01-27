@@ -5,6 +5,7 @@ import Prescriptions from "./pages/prescriptions";
 import YourDoctor from "./pages/yourDoctor";
 import AIChatbot from "./pages/AIChatbot";
 import DiagnosisForm from "./pages/DiagnosisForm";
+import Home from "./pages/home";
 
 import { ChakraProvider } from "@chakra-ui/react";
 
@@ -14,7 +15,7 @@ function App() {
             <div className="bg-black text-white h-screen">
                 <Router>
                     <Routes>
-                        {/* <Route path="/" element={<Home/>}  ></Route> */}
+                        <Route path="/" element={<Home/>}  ></Route>
                         {/* <Route path="/features" element={<Features/>}  ></Route> */}
                         <Route
                             path="/patientDashboard"
