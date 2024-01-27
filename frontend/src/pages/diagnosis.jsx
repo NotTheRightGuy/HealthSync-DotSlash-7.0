@@ -1,11 +1,11 @@
 import DiagnosisWithContent from "../components/diagnosisWithContent"
 import PatientDashboardNavbar from "../components/patientDashboardNavbar"
-import Gears from '../assets/Gears.png';
-import medDoc from '../assets/Medical Doctor.png';
+import Gears from '../assets/Gears.svg';
+import medDoc from '../assets/Medical Doctor.svg';
 import { useState } from "react";
 
 export default function Diagnosis(props) {
-    const [diagnosis, setDiagnosis] = useState(true)
+    const [diagnosis, setDiagnosis] = useState(false)
     return (
         <div className="h-full ">
             <PatientDashboardNavbar
