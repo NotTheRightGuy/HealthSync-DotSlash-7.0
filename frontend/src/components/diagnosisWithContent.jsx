@@ -9,6 +9,7 @@ export default function DiagnosisWithContent({ diagnosis }) {
                 const formattedDate = new Date(diagnosis.date);
                 return (
                     <PatientDiagnosisCard
+                        id={diagnosis._id}
                         disease={diagnosis.disease}
                         probability={diagnosis.probability}
                         date={`${formattedDate.getDate()}/${

@@ -87,4 +87,27 @@ app.get("/get-all/:patientID", (req, res) => {
     });
 });
 
+app.get("/get/:diagnosisID", (req, res) => {
+    const diagnosisID = req.params.diagnosisID;
+    Diagnosis.findById(diagnosisID)
+        .then((result) => {
+            if (!result) {
+                res.status(404).json({
+                    message: "Diagnosis not found",
+                });
+            } else {
+                res.status(200).json({
+                    message: "Diagnosis fetched successfully",
+                    diagnosis: result,
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(400).json({
+                message: "Error fetching diagnosis",
+                error: err,
+            });
+        });
+});
+
 module.exports = app;

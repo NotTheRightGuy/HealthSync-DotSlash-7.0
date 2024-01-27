@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function DiagnosisCard(props) {
     const [diagnosis, setDiagnosis] = useState({
+        id: props.id,
         disease: props.disease,
         date: props.date,
         probability: props.probability,
@@ -10,10 +12,15 @@ export default function DiagnosisCard(props) {
         needFeedback: props.needFeedback,
     });
 
-    console.log(diagnosis);
+    const navigate = useNavigate();
 
     return (
-        <div className="bg-[#0f0f11] rounded-3xl w-72 border-[1px] border-[#bfbfbf] font-inter">
+        <div
+            className="bg-[#0f0f11] rounded-3xl w-72 border-[1px] border-[#bfbfbf] font-inter hover:cursor-pointer"
+            onClick={() => {
+                navigate(`/patientDashboard/diagnosis-result/${diagnosis.id}`);
+            }}
+        >
             <div className="px-5 py-3 flex-col justify-between text-3xl font-medium h-24 font-bricolage">
                 {diagnosis.disease}
                 <div className="text-2xl font-medium text-gray-300 opacity-45">
