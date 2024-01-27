@@ -1,4 +1,4 @@
-import DiagnosisWithContent from "../components/patientDashboardComps/diagnosisWithContent"
+import DiagnosisWithContent from "../components/diagnosisWithContent"
 import PatientDashboardNavbar from "../components/patientDashboardNavbar"
 import Gears from '../assets/Gears.png';
 import medDoc from '../assets/Medical Doctor.png';
@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Diagnosis(props) {
     const [diagnosis, setDiagnosis] = useState(true)
     return (
-        <div className="h-full">
+        <div className="h-full ">
             <PatientDashboardNavbar
                 links={[
                     {name: "Diagnosis", path: "/patientDashboard/diagnosis"},
@@ -20,7 +20,10 @@ export default function Diagnosis(props) {
 
             {
                 diagnosis === true ?
-                <DiagnosisWithContent /> : 
+                <div className="">
+                    <DiagnosisWithContent />
+                </div>
+                     : 
                 <div className="flex flex-col gap-12 justify-center items-center text-xs h-5/6 font-medium">
                     
                     <div className='flex w-full gap-10 justify-center'>
