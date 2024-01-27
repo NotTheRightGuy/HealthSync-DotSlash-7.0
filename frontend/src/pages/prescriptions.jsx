@@ -1,8 +1,10 @@
 import PatientDashboardNavbar from "../components/patientDashboardNavbar"
 import finDocs from '../assets/financial documents.png';
 import { useState } from "react";
+import PrescriptionContent from "../components/prescriptionContent";
+
 export default function Diagnosis(props) {
-    const [prescriptions, setPrescriptions] = useState(false)
+    const [prescriptions, setPrescriptions] = useState(true)
 
     const uploadPrescriptions = () => {
         console.log("prescriptions Called")
@@ -20,7 +22,9 @@ export default function Diagnosis(props) {
             />
             {
                 prescriptions === true ?
-                <PrescriptionWithContent /> : 
+                <PrescriptionContent 
+                    currPage = "prescriptions"
+                /> : 
                 <div className="flex flex-col gap-7 justify-center items-center text-xs h-5/6 font-medium">
                     
                     <div className='flex w-full gap-10 justify-center'>
