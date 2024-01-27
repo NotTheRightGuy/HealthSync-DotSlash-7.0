@@ -118,12 +118,8 @@ export default function PatientDetails(props) {
                 <div className="text-3xl">
                     Does this model look correct to you ?
                     <form className="flex gap-6 items-center mt-5">
-                            <input type="radio" id="html" name="fav_language" value="HTML">
-                              <label for="html">HTML</label><br>
-                            <input type="radio" className="accent-black w-4 h-4"
-                                onClick={(e)=>{
-                                    setModelCorrection(!modelCorrection)
-                                }}/>
+                            <input type="radio" id="html" name="fav_language" value="HTML"/>
+                            {/*   <label for="html">HTML</label><br> */}
                             <span className="text-base ml-2 opacity-65">Yes</span>
                             <input type="radio" className=" w-4 h-4" 
                                 onClick={(e)=>{setModelInCorrection(!modelInCorrection)

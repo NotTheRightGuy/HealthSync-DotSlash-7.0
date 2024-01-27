@@ -112,7 +112,7 @@ const DiagnosisResult = () => {
                         </h1>
                         <p className="mt-4 text-sm font-inter opacity-70">
                             {feedback.length == 0 ? (
-                                <div>Loading...</div>
+                                <p>Loading...</p>
                             ) : (
                                 feedback.response
                             )}

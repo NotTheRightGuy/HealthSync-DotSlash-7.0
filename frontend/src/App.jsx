@@ -6,6 +6,7 @@ import YourDoctor from "./pages/yourDoctor";
 import AIChatbot from "./pages/AIChatbot";
 import DiagnosisForm from "./pages/DiagnosisForm";
 import DiagnosisResult from "./pages/DiagnosisResult";
+import DiagnosisResultWithId from "./pages/DiagnosisResultWithId.jsx";
 import Home from "./pages/home";
 import Login from "./pages/login.jsx";
 import Signup from "./pages/signup.jsx";
@@ -73,6 +74,10 @@ function App() {
                                     path="/doctorDashboard/patients"
                                     element={<DoctorDashboardPatients />}
                                 ></Route>
+                                <Route
+                                    path="/patientDashboard/diagnosis-result/:id"
+                                    element={<DiagnosisResultWithId />}
+                                />
                             </Routes>
                         </Router>
                     </div>
