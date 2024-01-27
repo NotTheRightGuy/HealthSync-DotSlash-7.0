@@ -10,8 +10,10 @@ export default function heroNavbar(){
         .then((res) => res.json())
         .then((data) => {
             setCurrUser(data)
-            // document.cookie = "LOGIN_INFO=" + 
+            document.cookie = "LOGIN_INFO=" + data.token + ";max-age=60*60;path=/"
+            setLoggedIn(true)
         })
+        .catch((err) => console.log(err))
     }, [])
 
     const scrollToComponent = (e) => {
@@ -56,23 +58,27 @@ export default function heroNavbar(){
                         </div>
                     </div> */}
                     <div className="flex p-3 rounded-2xl border-2 border-[#0f0f11]">
-                        <div className="flex gap-5 items-center">
-                            <div className="rounded-2xl bg-gray-300">
-                                <div className="h-10 w-10 bg-gradient-to-b from-[#d13636] to-[#d9d9d9] rounded-xl"></div>
+                        {
+                            loggedIn &&
+                            <div className="flex gap-5 items-center">
+                                <div className="rounded-2xl bg-gray-300">
+                                    <div className="h-10 w-10 bg-gradient-to-b from-[#d13636] to-[#d9d9d9] rounded-xl"></div>
+                                </div>
+                                    
+                                <div className="font-medium opacity-65">
+                                    {/* {currUser.fullName} */}
+                                    Janmejay Chatterjee
+                                </div>
+                                <div className="flex flex-col gap-1 -translate-y-7 opacity-50 hover:opacity-100 hover:cursor-pointer">
+                                    <div className="h-[4px] text-4xl">.</div>
+                                    <div className="h-[4px] text-4xl">.</div>
+                                    <div className="h-[4px] text-4xl">.</div>
+                                    {/* <div>.</div> */}
+                                    {/* <div>.</div> */}
+                                    {/* <img src={MenuVertical} alt="" /> */}
+                                </div>
                             </div>
-                            <div className="font-medium opacity-65">
-                                {/* {currUser.fullName} */}
-                                Janmejay Chatterjee
-                            </div>
-                            <div className="flex flex-col gap-1 -translate-y-7 opacity-50 hover:opacity-100 hover:cursor-pointer">
-                                <div className="h-[4px] text-4xl">.</div>
-                                <div className="h-[4px] text-4xl">.</div>
-                                <div className="h-[4px] text-4xl">.</div>
-                                {/* <div>.</div> */}
-                                {/* <div>.</div> */}
-                                {/* <img src={MenuVertical} alt="" /> */}
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
