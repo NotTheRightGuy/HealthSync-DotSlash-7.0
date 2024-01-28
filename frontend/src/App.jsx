@@ -9,9 +9,10 @@ import DiagnosisResult from "./pages/DiagnosisResult";
 import DiagnosisResultWithId from "./pages/DiagnosisResultWithId.jsx";
 import Home from "./pages/home";
 import Login from "./pages/login.jsx";
-import Signup from "./pages/signup.jsx";
 import DoctorDashboardPatients from "./pages/doctorDashboardPatients.jsx";
 import DoctorDashboardArticles from "./pages/doctorDashboardArticles.jsx";
+
+import DoctorDashboardPatientsWithId from "./pages/DoctorDashboardPatientsWithId.jsx";
 
 import { RecoilRoot } from "recoil";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -73,6 +74,10 @@ function App() {
                                 <Route
                                     path="/doctorDashboard/patients"
                                     element={<DoctorDashboardPatients />}
+                                ></Route>
+                                <Route
+                                    path="/doctorDashboard/patients/:id"
+                                    element={<DoctorDashboardPatientsWithId />}
                                 ></Route>
                                 <Route
                                     path="/patientDashboard/diagnosis-result/:id"

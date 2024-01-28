@@ -140,7 +140,7 @@ export default function Home() {
                     Welcome to the Future of Personalized Healthcare with our
                     Integrated Patient Management System!
                 </div>
-                <div className="font-inter flex gap-10">
+                <div className="font-inter flex gap-10 z-20">
                     <div
                         className="bg-[#27272a] text-xl w-fit px-8 py-3 rounded-md border-2 border-[#3f3f46] cursor-pointer hover:border-[#a8a8a8] "
                         onClick={handleClick}
@@ -164,7 +164,7 @@ export default function Home() {
                     className="absolute z-0 w-screen translate-y-16"
                     alt=""
                 />
-                <img src={PatientDashboardImg} className="z-10" alt="" />
+                <img src={PatientDashboardImg} className="z-10" />
             </div>
             <div
                 className="flex flex-col items-center justify-center mt-44 gap-7"

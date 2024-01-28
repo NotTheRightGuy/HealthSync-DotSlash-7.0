@@ -1,9 +1,24 @@
 import PatientDashboardNavbar from "../components/patientDashboardNavbar";
 import PatientsInBed from "../assets/patient in bed.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import CurrPatients from "../components/currPatients";
+import DiagnosisCard from "../components/diagnosisCard";
 export default function doctorDashboard() {
     const [currPatients, setCurrPatients] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:3000/api/v1/doctor/get-patients", {
+                headers: {
+                    Authorization: localStorage.getItem("token"),
+                },
+            })
+            .then((res) => {
+                console.log(res.data.patients);
+                setCurrPatients(res.data.patients);
+            });
+    }, []);
 
     return (
         <div className="h-full">
@@ -15,7 +30,9 @@ export default function doctorDashboard() {
                 currPage="Patients"
             />
             {currPatients.length > 0 ? (
-                <></>
+                <>
+                    <CurrPatients allPatients={currPatients} />
+                </>
             ) : (
                 <div className="flex flex-center flex-col gap-5 justify-center items-center w-screen h-5/6">
                     <div className="w-fit h-fit">
