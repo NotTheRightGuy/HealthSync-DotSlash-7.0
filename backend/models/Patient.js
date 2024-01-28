@@ -11,6 +11,10 @@ const patientSchema = mongoose.Schema({
         min: 2,
         max: 255,
     },
+    doctorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Doctor",
+    },
     age: {
         type: Number,
         required: true,

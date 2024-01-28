@@ -78,6 +78,7 @@ function App() {
                                     path="/patientDashboard/diagnosis-result/:id"
                                     element={<DiagnosisResultWithId />}
                                 />
+                                <Route path="/auth/login" element={<Login />} />
                             </Routes>
                         </Router>
                     </div>
