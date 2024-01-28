@@ -1,4 +1,4 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+![Screenshot 2024-01-28 111838](https://github.com/NotTheRightGuy/HealthSync-DotSlash-7.0/assets/73027078/b7f4e3e7-770f-45a3-964d-779ab734db73)<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
 
 <!-- PROJECT LOGO -->
@@ -82,6 +82,18 @@ Don't forget to give the project a star! Thanks again!
 
 
 ## User Flow
+### Login
+  ![Screenshot 2023-11-29 160352](https://github.com/NotTheRightGuy/HealthSync-DotSlash-7.0/blob/main/login.png)
+
+### Doctor's Dashboard
+1) Patient Appointments
+  ![Screenshot 2023-11-29 160352](https://github.com/NotTheRightGuy/HealthSync-DotSlash-7.0/blob/main/img/Screenshot%202024-01-28%20112248.png)
+
+2) Patient Details
+    ![Screenshot 2023-11-29 160352](https://github.com/NotTheRightGuy/HealthSync-DotSlash-7.0/blob/main/img/Screenshot%202024-01-28%20112533.png)
+  
+
+
 
 
 <!-- LICENSE -->
