@@ -52,7 +52,7 @@ const CheckModelDiagnosis = () => {
         if (correctDisease.current.value != "") {
             diag.disease = correctDisease.current.value;
         }
-        const messageToSend = `My patient is suffering from ${diag.disease}. Your task is to give the medicines used to cure it and the precautions one need to take Dont give any other reply apart from this.\nStrictly follow the format as such\nMedcines\n(all the medicines)\n\nPrecautions\n(all the precautions one need to take)`;
+        const messageToSend = `My patient is suffering from ${diag.disease}. Your task is to give the medicines used to cure it and the precautions one need to take Dont give any other reply apart from this.Be specific with the medicine names\nStrictly follow the format as such\nMedcines\n(all the medicines)\n\nPrecautions\n(all the precautions one need to take)`;
         axios
             .post("http://localhost:3000/api/v1/diagnosis/chat", {
                 message: messageToSend,
