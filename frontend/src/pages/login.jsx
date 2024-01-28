@@ -79,7 +79,7 @@ export default function Login(){
                             </div>
                         </form>
                         <div className='flex justify-between text-xs '>
-                            <a href="/signup">
+                            <a href="/auth/signup">
                                 <div className='opacity-60 hover:opacity-100'>
                                     Don't have an account ? <span className='underline underline-offset-4 cursor-pointer'>Sign up</span>
                                 </div>
