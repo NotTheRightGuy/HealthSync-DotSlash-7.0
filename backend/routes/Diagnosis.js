@@ -33,7 +33,7 @@ app.post("/upload", checkPatient, (req, res) => {
         });
 });
 
-app.post("/predict", checkPatient, async (req, res) => {
+app.post("/predict", async (req, res) => {
     const { _id, symptoms } = req.body;
 
     try {
@@ -53,7 +53,7 @@ app.post("/predict", checkPatient, async (req, res) => {
     }
 });
 
-app.post("/chat", checkPatient, async (req, res) => {
+app.post("/chat", async (req, res) => {
     const { message } = req.body;
     try {
         const result = await axios.post("http://127.0.0.1:1410/chat", {

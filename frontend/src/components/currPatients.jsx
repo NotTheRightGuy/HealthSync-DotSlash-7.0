@@ -1,73 +1,84 @@
-import PatientDiagnosisCard from "./diagnosisCard"
-import React, {useState} from 'react'
-import DoctorPatientCard from "./doctorPatientCard"
-import PatientDetails from "./patientDetails"
-export default function DiagnosisWithContent(props){
-    const [allPatients, setAllPatients] = useState(props.allPatients)
+import DiagnosisCard from "./doctorPatientCard";
+import { useState, useEffect } from "react";
+import PatientDetails from "./patientDetails";
 
-    const [goToPatientDetails, setGoToPatientDetails] = useState(false)
-    const [selectedPatient, setSelectedPatient] = useState({})
+export default function DiagnosisWithContent({ allPatients }) {
 
-    const patientDetails = (e) => {
-        console.log(e.target,"child")
-        setGoToPatientDetails(true)
+    const tempPatients = [
+        {
+            _id: "1",
+            firstName: "John",
+            lastName: "Doe",
+            age: "25",
+            bloodGroup: "A+",
+        },
+        {
+            _id: "2",
+            firstName: "John",
+            lastName: "Doe",
+            age: "25",
+            bloodGroup: "A+",
+        },
+        {
+            _id: "3",
+            firstName: "John",
+            lastName: "Doe",
+            age: "25",
+            bloodGroup: "A+",
+        },
+        {
+            _id: "4",
+            firstName: "John",
+            lastName: "Doe",
+            age: "25",
+            bloodGroup: "A+",
+        },
+        {
+            _id: "5",
+            firstName: "John",
+            lastName: "Doe",
+            age: "25",
+            bloodGroup: "A+",
+        }
+    ];
+
+    const [selectedPatient, setSelectedPatient] = useState("");
+    const [getPatient, setGetPatient] = useState(false);
+
+    useEffect(() => {
+        console.log(selectedPatient);
+    }, [selectedPatient]);
+
+    const changeSelectedPatient = (e) => {
+        console.log("selected")
+        console.log(e.currentTarget.querySelector(".currP").innerHTML);
+        setSelectedPatient(e.currentTarget.querySelector(".currP").innerHTML);
+        setGetPatient(true);
     }
 
-    return(
-        <div>
+    return (
+        <div className="p-10">
+            {!getPatient && tempPatients.map((patient) => {
+                return (
+                    <div key={patient._id} onClick={changeSelectedPatient}>
+                        <div className="currP hidden">{patient._id}</div>
+                        <DiagnosisCard
+                            key={patient._id}
+                            id={patient._id}
+                            name={patient.firstName + " " + patient.lastName}
+                            age={patient.age}
+                            bloodGroup={patient.bloodGroup}
+                            />
+                    </div>
+                );
+            })}
             {
-                goToPatientDetails ? <PatientDetails /> : 
-
-                <div className="grid grid-cols-3 p-10 justify-items-center gap-10 bg-black ">
-                    {/* {
-                        allPatients.map(
-                            (patient) => {
-                                <div >
-                                    <div className="hidden">
-                                        {patient}
-                                    </div>
-                                    <DoctorPatientCard
-                                        name = {patient.name}
-                                        age = {patient.age}
-                                        bloodGroup = {patient.bloodGroup}
-                                        priorIllnesses = {patient.priorIllnesses}
-                                        status = {patient.status}
-                                    />
-                                <div>
-                            }
-                            )
-                        } */}
-                    <div onClick = {patientDetails} className="w-10/12">
-                        <DoctorPatientCard
-                            name = "John Doe"
-                            age = "21"
-                            bloodGroup = "A+"
-                            priorIllnesses = {["Dengue", "Malaria"]}
-                            status = "Awaiting Diagnosis"
-                            />
-                    </div>
-                    <div onClick = {patientDetails} className="w-10/12">
-
-                        <DoctorPatientCard
-                            name = "Not John Doe"
-                            age = "22"
-                            bloodGroup = "A+"
-                            priorIllnesses = {["Dengue", "Malaria"]}
-                            status = "Awaiting Diagnosis"
-                            />
-                    </div>
-                    <div onClick = {patientDetails} className="w-10/12">
-                        <DoctorPatientCard
-                            name = "Maybe John Doe"
-                            age = "6969"
-                            bloodGroup = "A+"
-                            priorIllnesses = {["Dengue", "Malaria"]}
-                            status = "Awaiting Diagnosis"
-                            />
-                    </div>
-
+                getPatient && <div>
+                    <PatientDetails
+                        _id={selectedPatient}
+                    /> 
                 </div>
             }
         </div>
-    )
+    );
 }

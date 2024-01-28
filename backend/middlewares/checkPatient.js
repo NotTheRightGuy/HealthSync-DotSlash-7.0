@@ -6,18 +6,19 @@ function checkPatient(req, res, next) {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) {
         res.status(401).json({
-            message: "Authentication failed",
+            message: "Token Not Found, Authentication failed",
         });
     } else {
         try {
             const decoded = jwt.verify(token, JWT_SECRET);
-            if (decoded.data.role !== "patient") {
+
+            if (decoded.role !== "patient") {
                 throw new Error("Not a patient");
             } else {
                 const prevBody = req.body;
                 const newBody = {
                     ...prevBody,
-                    ...decoded.data,
+                    ...decoded,
                 };
                 req.body = newBody;
                 next();

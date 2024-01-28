@@ -1,18 +1,12 @@
 import { useState } from "react";
-import Diagnosis from "../pages/diagnosis";
-import MenuVertical from "../assets/Menu Vertical.png";
 import { useNavigate } from "react-router-dom";
 import { CiMenuKebab } from "react-icons/ci";
-// import Gears from '../assets/Gears.png';
 
 export default function PatientDashboardNavbar(props) {
     const [currComponent, setCurrComponent] = useState("Diagnosis");
     const navigate = useNavigate();
-    console.log(currComponent, "curr");
-    console.log(props.currPage, "page");
 
     const changeComponent = (e) => {
-        console.log(e.target.attributes.name);
         navigate(e.target.attributes.name.value);
     };
 
@@ -45,21 +39,13 @@ export default function PatientDashboardNavbar(props) {
                     })}
                 </div>
                 <div className="user">
-                    {/* <div className="flex gap-2 items-center">
-                        <div className="w-10 h-10 rounded-full bg-gray-300">
-                            <img src={props.userImage} alt="userImage" />
-                            </div>
-                        <div className="font-medium">
-                        {props.userName}
-                        </div>
-                    </div> */}
                     <div className="flex p-3 rounded-2xl border-2 border-[#0f0f11]">
                         <div className="flex gap-5 items-center">
                             <div className="rounded-2xl bg-gray-300">
                                 <div className="h-10 w-10 bg-gradient-to-b from-[#d13636] to-[#d9d9d9] rounded-xl"></div>
                             </div>
                             <div className="font-medium opacity-65">
-                                Janmejay Chatterjee
+                                John Doe
                             </div>
                             <CiMenuKebab className="text-secondary" />
                         </div>

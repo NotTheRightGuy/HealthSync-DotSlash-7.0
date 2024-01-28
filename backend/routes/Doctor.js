@@ -3,6 +3,7 @@ const docter = require("../models/Doctor");
 const auth = require("../models/Auth");
 const jwt = require("jsonwebtoken");
 const { hashPassword, comparePassword } = require("../utils/passwordHasher");
+const Patient = require("../models/Patient");
 const app = Router();
 
 app.post("/sign-up", (req, res) => {
@@ -135,21 +136,39 @@ app.get("/get-doctor/:id", (req, res) => {
         });
 });
 
-app.get("/get-patients/:id", (req, res) => {
-    docter
-        .findById(req.params.id)
-        .then((doctor) => {
-            res.status(200).json({
-                message: "Patients found",
-                patients: doctor.patients_assigned,
-            });
-        })
-        .catch((err) => {
-            res.status(400).json({
-                message: "Patients not found",
-                error: err,
-            });
+app.get("/get-patients/", (req, res) => {
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) {
+        return res.status(400).json({
+            message: "Token not found",
         });
+    } else {
+        const decodedToken = jwt.decode(token);
+        console.log(decodedToken);
+        docter
+            .findById(decodedToken._id)
+            .then((doctor) => {
+                Patient.find({ doctorId: doctor._id })
+                    .then((patients) => {
+                        res.status(200).json({
+                            message: "Patients found",
+                            patients,
+                        });
+                    })
+                    .catch((err) => {
+                        res.status(400).json({
+                            message: "Patients not found",
+                            error: err,
+                        });
+                    });
+            })
+            .catch((err) => {
+                res.status(400).json({
+                    message: "Patients not found",
+                    error: err,
+                });
+            });
+    }
 });
 
 module.exports = app;

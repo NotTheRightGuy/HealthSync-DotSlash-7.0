@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const Patient = require("../models/Patient");
+const Doctor = require("../models/Doctor");
 const Auth = require("../models/Auth");
 const Prescription = require("../models/Prescription");
 
@@ -39,10 +40,57 @@ app.post("/sign-up", (req, res) => {
                 patient
                     .save()
                     .then((data) => {
-                        res.status(200).json({
-                            message: "Patient created successfully",
-                            data: data,
-                        });
+                        // Randomly assign a doctor to the patient
+                        Doctor.aggregate([{ $sample: { size: 1 } }])
+                            .then((data) => {
+                                const doctor = data[0];
+                                const patientId = patient._id;
+                                const doctorId = doctor._id;
+
+                                Patient.findByIdAndUpdate(
+                                    patientId,
+                                    {
+                                        doctorId: doctorId,
+                                    },
+                                    { new: true }
+                                )
+                                    .then((data) => {
+                                        Doctor.findByIdAndUpdate(
+                                            doctorId,
+                                            {
+                                                $push: {
+                                                    patients_assigned:
+                                                        patient._id,
+                                                },
+                                            },
+                                            { new: true }
+                                        )
+                                            .then((data) => {
+                                                console.log(data);
+                                            })
+                                            .catch((err) => {
+                                                console.log(err);
+                                            });
+                                        res.status(200).json({
+                                            message: "Patient created",
+                                            data: data,
+                                        });
+                                    })
+                                    .catch((err) => {
+                                        res.status(400).json({
+                                            message: "Error creating patient",
+                                            error: err,
+                                        });
+                                    });
+                            })
+                            .catch((err) => {
+                                res.status(400).json({
+                                    message: "Error creating patient",
+                                    error: err,
+                                });
+                            });
+
+                        // Add this patient ID to the added doctor's patient list
                     })
                     .catch((err) => {
                         if (err.code === 11000) {
