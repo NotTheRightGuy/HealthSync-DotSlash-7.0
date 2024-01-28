@@ -99,8 +99,8 @@ export default function Home() {
                                 </div>
 
                                 <div className="font-medium opacity-65">
-                                    {/* {currUser.fullName} */}
-                                    Janmejay Chatterjee
+                                    {currUser.fullName}
+                                    {/* Janmejay Chatterjee */}
                                 </div>
                                 <CiMenuKebab className="text-secondary" />
 
@@ -160,11 +160,11 @@ export default function Home() {
                 <div>
                     <div className="text-6xl font-medium ">
                         {" "}
-                        A New era of productive{" "}
+                        A New era of productivity{" "}
                     </div>
                     <div className="text-6xl font-medium text-center">
                         {" "}
-                        student begins
+                        begins
                     </div>
                 </div>
                 <div className="text-base font-inter">
