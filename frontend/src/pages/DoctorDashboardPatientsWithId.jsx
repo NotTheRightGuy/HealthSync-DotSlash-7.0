@@ -7,9 +7,7 @@ function DiagnosisCard({ diagnosis }) {
         <div
             className="bg-[#0f0f11] rounded-3xl w-72 border-[1px] border-[#bfbfbf] font-inter hover:cursor-pointer"
             onClick={() => {
-                navigate(
-                    `http://localhost:3000/api/v1/diagnosis/update/${diagnosis._id}`
-                );
+                window.location.href = `/doctorDashboard/check/${diagnosis._id}`;
             }}
         >
             <div className="px-5 py-3 flex-col justify-between text-3xl font-medium h-24 font-bricolage">
@@ -56,7 +54,7 @@ function DiagnosisCard({ diagnosis }) {
 }
 
 const DoctorDashboardPatientsWithId = () => {
-    const [diagnosis, setDiagnosis] = useState({});
+    const [diagnosis, setDiagnosis] = useState([]);
     useEffect(() => {
         axios
             .get(`http://localhost:3000/api/v1/diagnosis/get-all`, {
