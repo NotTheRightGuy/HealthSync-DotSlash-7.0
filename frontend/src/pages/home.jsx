@@ -6,6 +6,7 @@ import Graph from "../assets/Graph.svg";
 import Gears2 from "../assets/Gears2.svg";
 import Robot from "../assets/Robot.svg";
 import { useNavigate } from "react-router";
+import { CiMenuKebab } from "react-icons/ci";
 
 export default function Home() {
     const [currUser, setCurrUser] = useState({});
@@ -68,7 +69,7 @@ export default function Home() {
                             "font-medium text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "
                         }
                         onClick={scrollToComponent}
-                    >
+                        >
                         Mission
                     </div>
                     <div
@@ -76,7 +77,7 @@ export default function Home() {
                             "font-medium text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "
                         }
                         onClick={scrollToComponent}
-                    >
+                        >
                         FAQs
                     </div>
                     <a href="https://www.github.com/NotTheRightGuy/HealthSync-DotSlash-7.0">
@@ -101,11 +102,8 @@ export default function Home() {
                                     {/* {currUser.fullName} */}
                                     Janmejay Chatterjee
                                 </div>
-                                <div className="flex flex-col gap-1 -translate-y-7 opacity-50 hover:opacity-100 hover:cursor-pointer">
-                                    <div className="h-[4px] text-4xl">.</div>
-                                    <div className="h-[4px] text-4xl">.</div>
-                                    <div className="h-[4px] text-4xl">.</div>
-                                </div>
+                                <CiMenuKebab className="text-secondary" />
+
                             </div>
                         )}
                         {!loggedIn && (
@@ -115,12 +113,9 @@ export default function Home() {
                                     className="cursor-pointer"
                                 >
                                     <FaGithub size={30}></FaGithub>
-                                </a>
-                                <a href="/login">
-                                    <div className="border-2 border-white p-2 rounded-xl">
-                                        {" "}
-                                        Get Started{" "}
-                                    </div>
+                                </a>    
+                                <a href="/auth/login">
+                                    <div className="border-2 border-white p-2 rounded-xl"> Get Started </div>
                                 </a>
                             </div>
                         )}
@@ -137,25 +132,17 @@ export default function Home() {
                     Rethinking Medical Productivity
                 </div>
                 <div className="font-inter">
-                    Welcome to the Future of Personalized Healthcare with our
-                    Integrated Patient Management System!
+                    Welcome to the Future of Personalized Healthcare with our Integrated Patient Management System!
                 </div>
-                <div className="font-inter flex gap-10 z-20">
-                    <div
-                        className="bg-[#27272a] text-xl w-fit px-8 py-3 rounded-md border-2 border-[#3f3f46] cursor-pointer hover:border-[#a8a8a8] "
-                        onClick={handleClick}
-                    >
-                        Features
+                <div className="font-inter flex gap-10 z-10   ">
+                    <div className="bg-[#27272a] text-xl w-fit px-8 py-3 rounded-md border-2 border-[#3f3f46] cursor-pointer hover:border-[#a8a8a8] " onClick={handleClick}>  
+                        Features    
                     </div>
-
-                    <div
-                        onClick={() => {
-                            window.location.href = "/auth/login";
-                        }}
-                        className="bg-[#166fd8] text-xl w-fit px-8 py-3 rounded-md hover:cursor-pointer hover:bg-blue-500"
-                    >
-                        Let's Begin
-                    </div>
+                    <a href="/auth/login">
+                        <div className="bg-[#166fd8] text-xl w-fit px-8 py-3 rounded-md cursor-pointer hover:bg-blue-500">
+                            Let's Begin
+                        </div>
+                    </a>
                 </div>
             </div>
             <div className="flex justify-center items-center mt-20">
