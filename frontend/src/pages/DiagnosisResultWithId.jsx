@@ -59,26 +59,49 @@ const DiagnosisResultWithId = () => {
                         </button>
                     </main>
                 </section>
-                <div className="blur-md">
-                    <section className="bg-[#232328] border-l-2 border-secondary h-full p-10">
-                        <div className="bg-secondary w-full h-64 rounded-xl"></div>
-                        <div className="mt-5">
-                            <h1 className="font-white text-3xl font-bricolage font-bold">
-                                Diagnosis Result
-                            </h1>
-                            <p className="font-inter opacity-50 text-sm">
-                                Your doctor will provide his feedback soon.
-                            </p>
+                {diagnosis.needFeedback ? (
+                    <>
+                        {" "}
+                        <div className="blur-md">
+                            <section className="bg-[#232328] border-l-2 border-secondary h-full p-10">
+                                <div className="bg-secondary w-full h-64 rounded-xl"></div>
+                                <div className="mt-5">
+                                    <h1 className="font-white text-3xl font-bricolage font-bold">
+                                        Diagnosis Result
+                                    </h1>
+                                    <p className="font-inter opacity-50 text-sm">
+                                        Your doctor will provide his feedback
+                                        soon.
+                                    </p>
+                                </div>
+                            </section>
                         </div>
-                    </section>
-                </div>
-                <div className="absolute w-fit h-fit text-sm text-center right-[15%] top-[45%] font-bricolage opacity-65">
-                    <FaLock className="ml-32 text-2xl" />
-                    <br />
-                    You will be able to access this section,
-                    <br />
-                    once your doctor has provided his feedback
-                </div>
+                        <div className="absolute w-fit h-fit text-sm text-center right-[15%] top-[45%] font-bricolage opacity-65">
+                            <FaLock className="ml-32 text-2xl" />
+                            <br />
+                            You will be able to access this section,
+                            <br />
+                            once your doctor has provided his feedback
+                        </div>{" "}
+                    </>
+                ) : (
+                    <div className="p-10">
+                        <h1 className="font-bricolage text-4xl font-bold opacity-75">
+                            Doctor's Feedback
+                        </h1>
+
+                        <h1 className="font-bricolage text-3xl font-bold opacity-80 mt-14">
+                            Doctor's remark
+                        </h1>
+                        <p className="">{diagnosis.doctorFeedback}</p>
+                        <h1 className="font-bricolage text-3xl font-bold opacity-80 mt-14">
+                            Generated Prescription
+                        </h1>
+                        <p className="font-inter text-sm">
+                            {diagnosis.doctorPres}
+                        </p>
+                    </div>
+                )}
             </main>
         </div>
     );

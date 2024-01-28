@@ -3,20 +3,17 @@ import PatientDashboardNavbar from "../components/patientDashboardNavbar";
 import Gears from "../assets/Gears.svg";
 import medDoc from "../assets/Medical Doctor.svg";
 import axios from "axios";
-import currentUser from "../recoil/currentUser";
-import { useRecoilState } from "recoil";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
 export default function Diagnosis(props) {
-    const [user, _] = useRecoilState(currentUser);
     const [diagnosis, setDiagnosis] = useState([]);
 
     const navigate = useNavigate();
 
     useEffect(() => {
         axios
-            .get(`http://localhost:3000/api/v1/diagnosis/get-all/${user._id}`)
+            .get(`http://localhost:3000/api/v1/diagnosis/get-all`)
             .then((res) => {
                 setDiagnosis(res.data.diagnosis);
             })

@@ -87,6 +87,21 @@ app.get("/get-all/:patientID", (req, res) => {
     });
 });
 
+app.get("/get-all", (req, res) => {
+    Diagnosis.find({}).then((result) => {
+        if (result.length === 0) {
+            return res.status(404).json({
+                message: "No diagnosis found",
+            });
+        } else {
+            return res.status(200).json({
+                message: "Diagnosis fetched successfully",
+                diagnosis: result,
+            });
+        }
+    });
+});
+
 app.get("/get/:diagnosisID", (req, res) => {
     const diagnosisID = req.params.diagnosisID;
     Diagnosis.findById(diagnosisID)
@@ -105,6 +120,45 @@ app.get("/get/:diagnosisID", (req, res) => {
         .catch((err) => {
             res.status(400).json({
                 message: "Error fetching diagnosis",
+                error: err,
+            });
+        });
+});
+
+app.put("/update/:diagnosisID", (req, res) => {
+    const { correctDisease, doctorNotes, doctorPres } = req.body;
+    const diagnosisID = req.params.diagnosisID;
+
+    Diagnosis.findById(diagnosisID)
+        .then((result) => {
+            if (!result) {
+                res.status(404).json({
+                    message: "Diagnosis not found",
+                });
+            } else {
+                Diagnosis.findByIdAndUpdate(diagnosisID, {
+                    disease: correctDisease,
+                    doctorFeedback: doctorNotes,
+                    doctorPres: doctorPres,
+                    needFeedback: false,
+                })
+                    .then((result) => {
+                        res.status(200).json({
+                            message: "Diagnosis updated successfully",
+                            diagnosis: result,
+                        });
+                    })
+                    .catch((err) => {
+                        res.status(400).json({
+                            message: "Error updating diagnosis",
+                            error: err,
+                        });
+                    });
+            }
+        })
+        .catch((err) => {
+            res.status(400).json({
+                message: "Error updating diagnosis",
                 error: err,
             });
         });

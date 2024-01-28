@@ -13,6 +13,7 @@ import DoctorDashboardPatients from "./pages/doctorDashboardPatients.jsx";
 import DoctorDashboardArticles from "./pages/doctorDashboardArticles.jsx";
 
 import DoctorDashboardPatientsWithId from "./pages/DoctorDashboardPatientsWithId.jsx";
+import CheckModelDiagnosis from "./pages/CheckModelDiagnosis.jsx";
 
 import { RecoilRoot } from "recoil";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -78,6 +79,10 @@ function App() {
                                 <Route
                                     path="/doctorDashboard/patients/:id"
                                     element={<DoctorDashboardPatientsWithId />}
+                                ></Route>
+                                <Route
+                                    path="/doctorDashboard/check/:id"
+                                    element={<CheckModelDiagnosis />}
                                 ></Route>
                                 <Route
                                     path="/patientDashboard/diagnosis-result/:id"
