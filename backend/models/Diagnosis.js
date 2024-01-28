@@ -10,10 +10,6 @@ const schema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Doctor",
     },
-    prescriptionID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Prescription",
-    },
     disease: {
         type: String,
         default: "",
@@ -33,7 +29,11 @@ const schema = mongoose.Schema({
         default: [],
         required: true,
     },
-    doctorRemark: {
+    doctorPres: {
+        type: String,
+        default: "",
+    },
+    doctorFeedback: {
         type: String,
         default: "",
     },

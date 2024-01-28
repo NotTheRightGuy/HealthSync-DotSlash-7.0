@@ -57,10 +57,8 @@ const DiagnosisResult = () => {
             )
             .then((res) => {
                 setDiagnosisResult(res.data);
-                const message = `I think I'm suffering ${res.data.prediction} and I'm feeling ${res.data.confidence}
-                sure about it. I have sent the diagnosis report to my doctor but in the mean time, 
-                I would like to get your feedback on this. Provide me any medicines out there which are used to cure it?
-                Any home remedies available? Be concise, upto point and don't repeat yourself.
+                const message = `I think I'm suffering ${res.data.prediction}. I have sent the diagnosis report to my doctor but in the mean time, 
+                I would like to get your feedback on this. What should I avoid during this time? Keep it concise and upto point. Don't repeat yourself
                 `;
                 axios
                     .post(

@@ -51,11 +51,13 @@ export default function DiagnosisCard(props) {
                     Doctor's Remark
                 </p>
                 {diagnosis.needFeedback ? (
-                    <p className="text-sm font-inter text-green-300 font-medium">
+                    <p className="text-sm font-inter text-yellow-300 font-medium">
                         Awaiting Doctor Check
                     </p>
                 ) : (
-                    ""
+                    <p className="text-sm font-inter text-green-300 font-medium">
+                        Doctor Check Completed, Click to view
+                    </p>
                 )}
             </div>
         </div>
