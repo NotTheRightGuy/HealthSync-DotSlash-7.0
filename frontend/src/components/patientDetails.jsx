@@ -11,6 +11,31 @@ export default function PatientDetails(props) {
 
     const [modelCorrection, setModelCorrection] = useState(false)
     const [modelInCorrection, setModelInCorrection] = useState(false)
+    const [doctorsRemark, setDoctorsRwmark] = useState("")
+    const [correctDiagnosis,setCorrectDiagnosis] = useState({disease:"",confidenceLevel:"",severity:""})
+
+    const sendFeedback=()=>{
+        console.log(modelCorrection,modelInCorrection,doctorsRemark,correctDiagnosis)
+        // fetch("http://localhost:5000/doctor/1/patient/1/diagnosis",{
+        //     method:"POST",
+        //     headers:{
+        //         "Content-Type":"application/json"
+        //     },
+        //     body:JSON.stringify({
+        //         modelCorrection:modelCorrection,
+        //         modelInCorrection:modelInCorrection,
+        //         doctorsRemark:doctorsRemark,
+        //         correctDiagnosis:correctDiagnosis
+        //     })
+        // })
+        // .then(res=>res.json())
+        // .then(data=>{
+        //     console.log(data)
+        // })
+        // .catch(err=>{
+        //     console.log(err)
+        // })
+    }
 
     console.log(props)
     return(
@@ -85,7 +110,7 @@ export default function PatientDetails(props) {
 
                 </div>
             </div>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-4">
                 <div className="text-3xl opacity-90 font-medium">
                     <div>Model Diagnosis Report</div>
                     <div className="text-2xl mt-6 mb-2">Listed Symptomps </div>
@@ -100,7 +125,7 @@ export default function PatientDetails(props) {
                     <li className="font-inter text-sm opacity-65 "> Skin Rashes </li>
                     <li className="font-inter text-sm opacity-65 "> Fever  </li>
                 </div>
-                <div className="text-3xl opacity-90 font-medium">
+                <div className="text-2xl opacity-90 font-medium">
                     <div>Model Outcome</div>
                     <div className="text-sm opacity-85 mt-2">Diagnosis : 
                         <span> Dengue</span>
@@ -115,29 +140,64 @@ export default function PatientDetails(props) {
                         {/* <span>{props.diagnosis.severity}</span> */}
                     </div>
                 </div>
-                <div className="text-3xl">
+                <div className="text-2xl">
                     Does this model look correct to you ?
-                    <form className="flex gap-6 items-center mt-5">
-                            <input type="radio" id="html" name="fav_language" value="HTML"/>
-                            {/*   <label for="html">HTML</label><br> */}
+                    <div className="flex gap-6 items-center mt-3">
+                        <div className="flex items-center">
+                            <input type="checkbox" className="w-4 h-4"
+                                onClick={(e)=>{
+                                    setModelCorrection(!modelCorrection)
+                                }}/>
                             <span className="text-base ml-2 opacity-65">Yes</span>
-                            <input type="radio" className=" w-4 h-4" 
+                        </div>
+                        <div className="flex items-center">
+                            <input type="checkbox" className=" w-4 h-4" 
                                 onClick={(e)=>{setModelInCorrection(!modelInCorrection)
                                     console.log(e.target.checked)
                                 }}/>
                             <span className="text-base ml-2 opacity-65">No</span>
-                    </form>
+                        </div>
+                    </div>
                 </div>
                 {
                     modelCorrection ?
                     <div className="flex flex-col">
                         Additional Remarks
-                        <textarea className="bg-transparent border-2 border-[#52525c] rounded-xl" name="" id="" cols="40" rows="5"></textarea>
+                        <textarea className="bg-transparent border-2 border-[#52525c] rounded-xl" name="" id="" cols="40" rows="5" onChange={(e)=>setDoctorsRemark(e.target.value)}></textarea>
                     </div>
-                    : null
-
+                        :
+                    null
                 }
-                <div className="border-2 border-[#52525c] p-2 w-2/6 text-center rounded-full absolute right-10 bottom-10 hover:border-white cursor-pointer ">
+                {
+                    modelInCorrection ? 
+                    <div className="-translate-y-2">
+                        <div className="text-2xl opacity-90 font-medium ">
+                            Correct Diagnosis
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <div className="flex gap-1">
+                                <div className="text-sm opacity-85 mr-16">Disease</div>
+                                <input type="text" className="border-2 border-[#52525c] bg-transparent rounded-xl w-1/2"
+                                    onChange={(e)=>setCorrectDiagnosis({...correctDiagnosis,disease:e.target.value})}
+                                    />
+                            </div>
+                            <div className="flex gap-1">
+                                <div className="text-sm opacity-85 mr-2">Confidence Level</div>
+                                <input type="text" className="border-2 border-[#52525c] bg-transparent rounded-xl w-1/2"
+                                    onChange={(e)=>setCorrectDiagnosis({...correctDiagnosis,confidenceLevel:e.target.value})}
+                                    />
+                            </div>
+                            <div className="flex gap-1">
+                                <div className="text-sm opacity-85 mr-16">Severity</div>
+                                <input type="text" className="border-2 border-[#52525c] bg-transparent rounded-xl w-1/2"
+                                    onChange={(e)=>setCorrectDiagnosis({...correctDiagnosis,severity:e.target.value})}
+                                />
+                            </div>
+                        </div>
+                    </div> 
+                    : null
+                }
+                <div className="border-2 border-[#52525c] p-2 w-2/6 text-center rounded-full absolute right-10 bottom-10 hover:border-white cursor-pointer " onClick={sendFeedback}>
                     Send Feedback
                 </div>
             </div>
