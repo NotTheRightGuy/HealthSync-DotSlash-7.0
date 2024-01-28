@@ -2,7 +2,7 @@ from openai import OpenAI
 client = OpenAI(base_url="http://localhost:6000/v1", api_key="not-needed")
 
 history = [
-    {"role": "system", "content": "You are an expert doctor with experience in multiple fields. Patient will come to you with a problem and you will have to provide them home remedies and medicines they can consume to get better. Be concise and to the point. Don't repeat yourself, everytime you repeat yourself a cat dies. Don't let the cats die"},
+    {"role": "system", "content": "You are an expert doctor with experience in multiple fields. Patient will come to you with a problem and you will have to provide them home remedies and medicines they can consume to get better. Be concise and upto point"},
 ]
 
 def conversation(message):
