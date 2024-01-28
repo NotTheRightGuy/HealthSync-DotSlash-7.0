@@ -5,19 +5,19 @@ import axios from "axios";
 import CurrPatients from "../components/currPatients";
 import DiagnosisCard from "../components/diagnosisCard";
 export default function doctorDashboard() {
-    const [currPatients, setCurrPatients] = useState(["check","cad"]);
+    const [currPatients, setCurrPatients] = useState(["check", "cad"]);
 
     useEffect(() => {
-        // axios
-        //     .get("http://localhost:3000/api/v1/doctor/get-patients", {
-        //         headers: {
-        //             Authorization: localStorage.getItem("token"),
-        //         },
-        //     })
-        //     .then((res) => {
-        //         console.log(res.data.patients);
-        //         setCurrPatients(res.data.patients);
-        //     });
+        axios
+            .get("http://localhost:3000/api/v1/doctor/get-patients", {
+                headers: {
+                    Authorization: localStorage.getItem("token"),
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+                setCurrPatients(res.data.patients);
+            });
     }, []);
 
     return (

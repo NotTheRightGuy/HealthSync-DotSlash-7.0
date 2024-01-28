@@ -3,13 +3,16 @@ import Identicon from "../assets/identicon.svg";
 import Age from "../assets/Age.svg";
 import Blood from "../assets/Drop of Blood.svg";
 
+import { useNavigate } from "react-router";
+
 export default function DiagnosisCard(props) {
+    const navigate = useNavigate();
     return (
         <div
             className="bg-[#0f0f11] rounded-3xl border-[1px] border-[#52525c] p-5 pr-10 flex flex-col gap-3 w-full hover:cursor-pointer"
-            // onClick={() => {
-            //     window.location.href = "/doctorDashboard/patients/" + props.id;
-            // }}
+            onClick={() => {
+                navigate(`/doctorDashboard/patients/${props.id}`);
+            }}
         >
             <div className="flex gap-6">
                 <div className="w-fit h-fit flex justify-center items-center rounded-full p-4 bg-black border-2 border-[#52525c]">
