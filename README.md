@@ -60,7 +60,7 @@ _Below is an example of how you can instruct your audience on installing and set
 ## Usage
 
 You will need the following database to setup the backend server locally on your machine
-### ![Mistral](https://huggingface.co/TheBloke/dolphin-2_6-phi-2-GGUF)
+### ![Mistral] (https://huggingface.co/TheBloke/dolphin-2_6-phi-2-GGUF)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -91,6 +91,11 @@ Don't forget to give the project a star! Thanks again!
 
 2) Patient Details
     ![Screenshot 2023-11-29 160352](https://github.com/NotTheRightGuy/HealthSync-DotSlash-7.0/blob/main/img/Screenshot%202024-01-28%20112533.png)
+
+### User's Dashboard 
+1) Your Doctor Details
+    ![Screenshot 2023-11-29 160352](https://github.com/NotTheRightGuy/HealthSync-DotSlash-7.0/blob/main/img/doctorDetais.png)
+   
   
 
 
