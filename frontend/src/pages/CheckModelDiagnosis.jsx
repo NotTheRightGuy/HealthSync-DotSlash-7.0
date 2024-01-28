@@ -121,10 +121,12 @@ const CheckModelDiagnosis = () => {
                     </p>
                     <input
                         type="text"
+                        ref={correctDisease}
                         className="bg-secondary rounded-lg w-full text-sm p-4 mt-2 font-inter focus:outline-none"
                         placeholder="Correct Diagnosis (Leave blank if correct)"
                     />
                     <Textarea
+                        ref={notes}
                         placeholder="Anything you want to add?"
                         style={{
                             marginTop: "10px",
