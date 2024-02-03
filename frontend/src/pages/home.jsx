@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { FaGithub } from "react-icons/fa6";
-import PatientDashboardImg from "../assets/patientDashboard.svg";
+import PatientDashboardImg from "../assets/PatientDashboard.svg";
 import Grad from "../assets/Hero Shape.svg";
 import Graph from "../assets/Graph.svg";
 import Gears2 from "../assets/Gears2.svg";
@@ -115,7 +115,7 @@ export default function Home() {
                                     <FaGithub size={30}></FaGithub>
                                 </a>    
                                 <a href="/auth/login">
-                                    <div className="border-2 border-white p-2 rounded-xl"> Get Started </div>
+                                    <div className="border-2 border-white px-2 py-1 rounded-xl"> Get Started </div>
                                 </a>
                             </div>
                         )}

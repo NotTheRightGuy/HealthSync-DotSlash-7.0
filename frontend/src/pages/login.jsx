@@ -3,7 +3,7 @@ import axios from "axios";
 import Eye from "../assets/eye.svg";
 import Google from "../assets/Google.svg";
 import Facebook from "../assets/Facebook.svg";
-import LifeSavers from "../assets/LifeSavers.png";
+import LifeSavers from "../assets/Lifesavers.png";
 import currentUser from "../recoil/currentUser";
 import { useRecoilState } from "recoil";
 
@@ -108,40 +108,15 @@ export default function Login() {
                         </form>
                         <div className='flex justify-between text-xs '>
                             <a href="/auth/signup">
-                                <div className='opacity-60 hover:opacity-100'>
-                                    Don't have an account ?(" ") 
-                                    <span className='underline underline-offset-4 cursor-pointer'>
+                                <div className='opacity-60'>
+                                    Don't have an account?{" "}
+                                    <span className='opacity-60 underline underline-offset-4 cursor-pointer hover:opacity-100'>
                                         Sign up
                                     </span>
                                 </div>
                             </a>
                             <div className="underline underline-offset-4 opacity-60 hover:opacity-100">
-                                Forgot Password ?
-                            </div>
-                        </div>
-                        <hr className="opacity-20 mt-6" />
-                        <div className="flex flex-col gap-4">
-                            <div className="flex bg-white gap-2 text-black font-inter items-center justify-center rounded-full py-4 ">
-                                <div>
-                                    {" "}
-                                    <img src={Google} className="h-6 " alt="" />
-                                </div>
-                                <div className="text-sm font-semibold h-fit ">
-                                    Sign In With Google
-                                </div>
-                            </div>
-                            <div className="flex bg-white text-black gap-2   font-inter items-center justify-center rounded-full py-4 ">
-                                <div>
-                                    {" "}
-                                    <img
-                                        src={Facebook}
-                                        className="h-6 "
-                                        alt=""
-                                    />
-                                </div>
-                                <div className="text-sm font-semibold h-fit ">
-                                    Sign In With Facebook
-                                </div>
+                                Forgot Password?
                             </div>
                         </div>
                     </div>
@@ -160,9 +135,7 @@ export default function Login() {
                     />
                     <div>
                         <div className="opacity-60">
-                            “This website has helped me and my husband so much.
-                            Now we no longer have to drive for long distance
-                            just to get a daily checkup“
+                            "This website has been a valuable resource for my husband and me, eliminating the need for us to travel long distances for our daily checkups"
                         </div>
                         <div className="opacity-90 mt-3">- Sophia Danis</div>
                     </div>

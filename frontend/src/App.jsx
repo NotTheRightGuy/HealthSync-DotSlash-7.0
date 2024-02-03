@@ -9,6 +9,7 @@ import DiagnosisResult from "./pages/DiagnosisResult";
 import DiagnosisResultWithId from "./pages/DiagnosisResultWithId.jsx";
 import Home from "./pages/home";
 import Login from "./pages/login.jsx";
+import SignUp from "./pages/SignUp.jsx";
 import DoctorDashboardPatients from "./pages/doctorDashboardPatients.jsx";
 import DoctorDashboardArticles from "./pages/doctorDashboardArticles.jsx";
 
@@ -92,10 +93,10 @@ function App() {
                                     path="/auth/login"
                                     element={<Login />}
                                 />
-                                {/* <Route
+                                <Route
                                     path="/auth/signup"
-                                    element={<Signup />}
-                                /> */}
+                                    element={<SignUp />}
+                                />
                             </Routes>
                         </Router>
                     </div>
