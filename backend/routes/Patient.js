@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const mongoose = require('mongoose');
 const Patient = require("../models/Patient");
 const Doctor = require("../models/Doctor");
 const Auth = require("../models/Auth");
@@ -7,17 +8,17 @@ const Prescription = require("../models/Prescription");
 const patientSchema = require("../schema/patientSchema");
 const jwt = require("jsonwebtoken");
 const app = Router();
-
-const checkPatient = require("../middlewares/checkPatient");
-
 const supabase = require("../supabase");
 
+const checkPatient = require("../middlewares/checkPatient");
 const { hashPassword, comparePassword } = require("../utils/passwordHasher");
 
-app.post("/sign-up", (req, res) => {
+app.post("/sign-up", async (req, res) => {
     const validation = patientSchema.safeParse(req.body);
     if (!validation.success) {
-        res.status(400).json(validation.error);
+        res.status(400).json({
+            error : "Validation failed. Please check your inputs"
+        });
     } else {
         const patient = new Patient({
             firstName: req.body.firstName,
@@ -26,8 +27,7 @@ app.post("/sign-up", (req, res) => {
             bloodGroup: req.body.bloodGroup,
             address: req.body.address,
             phone: req.body.phone,
-            email: req.body.email,
-            prior_chronic_diseases: req.body.prior_chronic_diseases,
+            email: req.body.email
         });
 
         const auth = new Auth({
@@ -35,88 +35,22 @@ app.post("/sign-up", (req, res) => {
             password: hashPassword(req.body.password),
         });
 
-        auth.save()
-            .then((data) => {
-                patient
-                    .save()
-                    .then((data) => {
-                        // Randomly assign a doctor to the patient
-                        Doctor.aggregate([{ $sample: { size: 1 } }])
-                            .then((data) => {
-                                const doctor = data[0];
-                                const patientId = patient._id;
-                                const doctorId = doctor._id;
-
-                                Patient.findByIdAndUpdate(
-                                    patientId,
-                                    {
-                                        doctorId: doctorId,
-                                    },
-                                    { new: true }
-                                )
-                                    .then((data) => {
-                                        Doctor.findByIdAndUpdate(
-                                            doctorId,
-                                            {
-                                                $push: {
-                                                    patients_assigned:
-                                                        patient._id,
-                                                },
-                                            },
-                                            { new: true }
-                                        )
-                                            .then((data) => {
-                                                console.log(data);
-                                            })
-                                            .catch((err) => {
-                                                console.log(err);
-                                            });
-                                        res.status(200).json({
-                                            message: "Patient created",
-                                            data: data,
-                                        });
-                                    })
-                                    .catch((err) => {
-                                        res.status(400).json({
-                                            message: "Error creating patient",
-                                            error: err,
-                                        });
-                                    });
-                            })
-                            .catch((err) => {
-                                res.status(400).json({
-                                    message: "Error creating patient",
-                                    error: err,
-                                });
-                            });
-
-                        // Add this patient ID to the added doctor's patient list
-                    })
-                    .catch((err) => {
-                        if (err.code === 11000) {
-                            res.status(400).json({
-                                message: "Email already exists",
-                            });
-                        } else {
-                            res.status(400).json({
-                                message: "Error creating patient",
-                                error: err,
-                            });
-                        }
-                    });
-            })
-            .catch((err) => {
-                if (err.code === 11000) {
-                    res.status(400).json({
-                        message: "Email already exists",
-                    });
-                } else {
-                    res.status(400).json({
-                        message: "Error creating patient",
-                        error: err,
-                    });
-                }
-            });
+        const user = await Auth.findOne({email:req.body.email});
+        if(user){
+            res.status(409).json({error:"Email already exists"});
+            return;
+        }
+        const doctor = await Doctor.find({});
+        if(doctor.length === 0){
+            res.status(402).json({error:"No doctor to assign"});
+            return
+        }
+        await auth.save();
+        const patientSaved = await patient.save();
+        await Doctor.updateMany({},{$push : {
+                patients_assigned: patientSaved._id
+        }})
+        res.json({error:"Patient created successfully"});
     }
 });
 
@@ -125,7 +59,7 @@ app.post("/sign-in", (req, res) => {
 
     Auth.findOne({ email: email })
         .then((data) => {
-            if (comparePassword(password, data.password) == true) {
+            if (comparePassword(password, data.password) === true) {
                 Patient.find({ email: email }).then((data) => {
                     const token = jwt.sign(
                         {

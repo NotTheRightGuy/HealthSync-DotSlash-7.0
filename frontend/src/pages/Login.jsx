@@ -1,19 +1,17 @@
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Eye from "../assets/eye.svg";
-import Google from "../assets/Google.svg";
-import Facebook from "../assets/Facebook.svg";
 import LifeSavers from "../assets/Lifesavers.png";
-import currentUser from "../recoil/currentUser";
-import { useRecoilState } from "recoil";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {useNavigate} from "react-router-dom";
 
 export default function Login() {
+    const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [show, setShow] = useState(false);
-
-    const [_, setUser] = useRecoilState(currentUser);
 
     const formSubmit = (e) => {
         e.preventDefault();
@@ -29,23 +27,25 @@ export default function Login() {
             })
             .then((res) => {
                 if (res.status == 200) {
-                    const userInfo = res.data.data;
-                    setUser({
-                        _id: userInfo._id,
-                        firstName: userInfo.firstName,
-                        lastName: userInfo.lastName,
-                    });
                     localStorage.setItem("token", "Bearer " + res.data.token);
-
-                    if (userInfo.role == "doctor") {
-                        window.location.href = "/doctorDashboard/patients";
+                    if (res.data.data.role == "doctor") {
+                        toast.success("Log in Successful, Redirecting!");
+                        setTimeout(()=>{
+                            navigate("/doctorDashboard/patients");
+                        },2000);
                     } else {
-                        window.location.href = "/patientDashboard/diagnosis";
+                        toast.success("Log in Successful, Redirecting!");
+                        setTimeout(()=>{
+                            navigate("/patientDashboard/diagnosis");
+                        },2000);
                     }
                 } else {
-                    console.log("Something went wrong");
+                    toast.error("Something went wrong on our side. We are looking into it");
                 }
-            });
+            }).catch(err =>{
+                toast.error("Invalid Credentials, Please try again");
+                console.log(err);
+        })
     };
 
     return (
@@ -96,12 +96,12 @@ export default function Login() {
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                className="text-lg bg-[#1569cb] font-inter py-3 rounded-full text-center cursor-pointer"
+                            <button
+                                className="text-lg bg-[#1569cb] font-inter py-3 rounded-full text-center cursor-pointer hover:opacity-80 transition-opacity"
                                 onClick={formSubmit}
                             >
                                 Sign in
-                            </div>
+                            </button>
                             <div className="message text-red-600">
                                 {errorMessage}
                             </div>
@@ -109,6 +109,7 @@ export default function Login() {
                         <div className='flex justify-between text-xs '>
                             <a href="/auth/signup">
                                 <div className='opacity-60'>
+                                    {/* eslint-disable-next-line react/no-unescaped-entities */}
                                     Don't have an account?{" "}
                                     <span className='opacity-60 underline underline-offset-4 cursor-pointer hover:opacity-100'>
                                         Sign up
@@ -141,9 +142,7 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-            {/* <div className='w-1/2 -translate-y-32 absolute'>
-                <img src={EllipseBlue} className='' alt="" />
-            </div> */}
+            <ToastContainer />
         </div>
     );
 }

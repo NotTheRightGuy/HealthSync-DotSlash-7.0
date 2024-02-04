@@ -9,7 +9,6 @@ const patientSchema = z.object({
     phone: z.number(),
     email: z.string().email().min(2).max(255),
     password: z.string().min(4).max(255),
-    prior_chronic_diseases: z.array(z.string()).default([]),
 });
 
 module.exports = patientSchema;

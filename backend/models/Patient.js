@@ -45,11 +45,7 @@ const patientSchema = mongoose.Schema({
         min: 2,
         max: 255,
         unique: true,
-    },
-    prior_chronic_diseases: {
-        type: Array,
-        default: [],
-    },
+    }
 });
 
 module.exports = mongoose.model("Patient", patientSchema);

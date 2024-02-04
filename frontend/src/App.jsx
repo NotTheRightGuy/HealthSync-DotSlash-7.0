@@ -8,7 +8,7 @@ import DiagnosisForm from "./pages/DiagnosisForm";
 import DiagnosisResult from "./pages/DiagnosisResult";
 import DiagnosisResultWithId from "./pages/DiagnosisResultWithId.jsx";
 import Home from "./pages/home";
-import Login from "./pages/login.jsx";
+import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import DoctorDashboardPatients from "./pages/doctorDashboardPatients.jsx";
 import DoctorDashboardArticles from "./pages/doctorDashboardArticles.jsx";
