@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import CurrPatients from "../components/currPatients";
 import DiagnosisCard from "../components/diagnosisCard";
-export default function doctorDashboard() {
+
+export default function doctorDashboardPatients() {
     const [currPatients, setCurrPatients] = useState(["check", "cad"]);
 
     useEffect(() => {
