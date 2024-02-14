@@ -5,7 +5,7 @@ const Doctor = require("../models/Doctor");
 const Auth = require("../models/Auth");
 const Prescription = require("../models/Prescription");
 
-const patientSchema = require("../schema/patientSchema");
+const patientSchema = require("../schema/patient");
 const jwt = require("jsonwebtoken");
 const app = Router();
 const supabase = require("../supabase");
