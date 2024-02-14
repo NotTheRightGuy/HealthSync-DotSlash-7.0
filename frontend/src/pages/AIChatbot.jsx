@@ -1,6 +1,6 @@
 import PatientDashboardNavbar from "../components/patientDashboardNavbar"
 
-export default function Diagnosis(props) {
+export default function AIChatbot(props) {
     return (
         <div className="h-full">
             <PatientDashboardNavbar

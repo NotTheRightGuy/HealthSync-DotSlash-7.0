@@ -1,4 +1,4 @@
-const symptomsArray = [
+const symptomWithId = [
     { name: "Itching", id: "itching" },
     { name: "Skin Rash", id: "skin_rash" },
     { name: "Nodal Skin Eruptions", id: "nodal_skin_eruptions" },
@@ -143,4 +143,4 @@ const symptomsArray = [
     { name: "Prognosis", id: "prognosis" },
 ];
 
-export default symptomsArray;
+export default symptomWithId;
