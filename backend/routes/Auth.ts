@@ -56,15 +56,15 @@ app.post('/patient/sign-up', async (req, res) => {
                     data: newPatient
                 })
             } else {
-                res.status(500).json({msg: "Invalid input format, Please try again"})
+                res.status(500).json({err: "Invalid input format, Please try again"})
             }
 
         } catch (err) {
             console.log(err);
-            res.status(403).json({msg: "Error creating patient", data: err});
+            res.status(403).json({err: "Error creating patient", data: err});
         }
     } else {
-        res.status(403).json({"msg": "Invalid email/password format"})
+        res.status(403).json({err: "Invalid email/password format"})
     }
 })
 
@@ -121,7 +121,7 @@ app.post('/doctor/sign-up', async (req, res) => {
 app.post('/login', async (req, res) => {
     const {email, password} = req.body;
     const auth_valid = auth.safeParse({email, password});
-    if (auth_valid) {
+    if (auth_valid.success) {
         try {
             const foundUser = await Auth.findFirst({
                 where: {
@@ -146,13 +146,13 @@ app.post('/login', async (req, res) => {
                     res.json({err: "Authentication failed. Invalid Password"});
                 }
             } else {
-                res.status(404).json({msg: "User not found"});
+                res.status(404).json({err: "User not found"});
             }
         } catch (err) {
-            res.status(401).json({msg: "No such user found", err: err});
+            res.status(401).json({err: err});
         }
     } else {
-        res.status(401).json({msg: "Invalid email/password format"});
+        res.status(401).json({err: "Invalid email/password format"});
     }
 })
 

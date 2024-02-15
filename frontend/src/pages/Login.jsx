@@ -1,55 +1,73 @@
 import { useState } from "react";
-import axios from "axios";
 import Eye from "../assets/eye.svg";
 import LifeSavers from "../assets/Lifesavers.png";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import {useNavigate} from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
     const navigate = useNavigate();
-    const [errorMessage, setErrorMessage] = useState("");
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [show, setShow] = useState(false);
 
     const formSubmit = (e) => {
         e.preventDefault();
-        if (username === "" || password === "") {
-            setErrorMessage("Please fill all the fields");
+        if (email === "" || password === "") {
+            toast.error("Please fill all the fields", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             return;
         }
-
-        axios
-            .post("http://localhost:3000/api/v1/auth/login", {
-                email: username,
-                password: password,
-            })
-            .then((res) => {
-                if (res.status == 200) {
-                    localStorage.setItem("token", "Bearer " + res.data.token);
-                    if (res.data.data.role == "doctor") {
-                        toast.success("Log in Successful, Redirecting!");
-                        setTimeout(()=>{
-                            navigate("/doctorDashboard/patients");
-                        },2000);
-                    } else {
-                        toast.success("Log in Successful, Redirecting!");
-                        setTimeout(()=>{
-                            navigate("/patientDashboard/diagnosis");
-                        },2000);
-                    }
-                } else {
-                    toast.error("Something went wrong on our side. We are looking into it");
-                }
-            }).catch(err =>{
-                toast.error("Invalid Credentials, Please try again");
-                console.log(err);
+        const toSend = {
+            email,
+            password,
+        };
+        fetch("http://localhost:3000/api/v1/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(toSend),
         })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.err) {
+                    toast.error(data.err, {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                } else {
+                    localStorage.setItem("token", data.token);
+                    toast.success("Logged in successfully", {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 2000);
+                }
+            });
     };
 
     return (
-        <div className="">
+        <div>
             <div className="flex w-screen h-screen">
                 <div className="w-full p-12 pb-0 ">
                     <div className="w-4/6">
@@ -67,9 +85,7 @@ export default function Login() {
                                 <input
                                     type="text"
                                     className="bg-transparent border-2 border-[#52525c] rounded-md p-2 hover:border-white font-inter"
-                                    onChange={(e) =>
-                                        setUsername(e.target.value)
-                                    }
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                             <div className="flex flex-col gap-2">
@@ -102,16 +118,13 @@ export default function Login() {
                             >
                                 Sign in
                             </button>
-                            <div className="message text-red-600">
-                                {errorMessage}
-                            </div>
                         </form>
-                        <div className='flex justify-between text-xs '>
+                        <div className="flex justify-between text-xs ">
                             <a href="/auth/signup">
-                                <div className='opacity-60'>
+                                <div className="opacity-60">
                                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                                     Don't have an account?{" "}
-                                    <span className='opacity-60 underline underline-offset-4 cursor-pointer hover:opacity-100'>
+                                    <span className="opacity-60 underline underline-offset-4 cursor-pointer hover:opacity-100">
                                         Sign up
                                     </span>
                                 </div>
@@ -136,9 +149,11 @@ export default function Login() {
                     />
                     <div>
                         <div className="opacity-60">
-                            "This website has been a valuable resource for my husband and me, eliminating the need for us to travel long distances for our daily checkups"
+                            "This website has been a valuable resource for my
+                            husband and me, eliminating the need for us to
+                            travel long distances for our daily checkups"
                         </div>
-                        <div className="opacity-90 mt-3">- Sophia Danis</div>
+                        <div className="opacity-90 mt-3"> - Sophia Danis</div>
                     </div>
                 </div>
             </div>

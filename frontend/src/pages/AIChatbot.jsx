@@ -1,17 +1,23 @@
-import PatientDashboardNavbar from "../components/patientDashboardNavbar"
+import PatientDashboardNavbar from "../components/patientDashboardNavbar";
 
 export default function AIChatbot(props) {
     return (
         <div className="h-full">
             <PatientDashboardNavbar
                 links={[
-                    {name: "Diagnosis", path: "/patientDashboard/diagnosis"},
-                    {name: "Prescriptions", path: "/patientDashboard/prescriptions"},
-                    {name: "Your Doctor", path: "/patientDashboard/yourDoctor"},
-                    {name: "AI Chatbot", path: "/patientDashboard/chatbot"},
+                    { name: "Diagnosis", path: "/patientDashboard/diagnosis" },
+                    {
+                        name: "Prescriptions",
+                        path: "/patientDashboard/prescriptions",
+                    },
+                    {
+                        name: "Your Doctor",
+                        path: "/patientDashboard/yourDoctor",
+                    },
+                    { name: "AI Chatbot", path: "/patientDashboard/chatbot" },
                 ]}
-                currPage = "AI Chatbot"
+                currPage="AI Chatbot"
             />
         </div>
-    )
+    );
 }
