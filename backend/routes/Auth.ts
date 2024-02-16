@@ -38,7 +38,7 @@ app.post('/patient/sign-up', async (req, res) => {
             const hashedPassword = hashPassword(password);
             const new_auth = await Auth.create({
                 data: {
-                    email, password: hashedPassword
+                     email, password: hashedPassword
                 }
             });
 

@@ -1,14 +1,12 @@
 import { useState, useRef } from "react";
 import SelectedSymptom from "../components/selectedSymptom";
 import symptomsArrays from "../utils/symptomWithId";
-import { Select } from "@chakra-ui/react";
 import { Textarea } from "@chakra-ui/react";
 import currentDiagnosis from "../recoil/currentDiagnosis";
 import { useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
 const DiagnosisForm = () => {
-    const presRef = useRef(null);
     const notesRef = useRef(null);
     const setDiagnosis = useSetRecoilState(currentDiagnosis);
     const navigate = useNavigate();
@@ -23,20 +21,14 @@ const DiagnosisForm = () => {
 
     function handleSubmit() {
         const symptomsId = symptoms.map((symptom) => symptom.id);
-        const pres = presRef.current.value;
         const diagnosis = {
             symptoms: symptomsId,
-            prescription: pres,
             additionalNotes: notesRef.current.value,
         };
         setDiagnosis(diagnosis);
         navigate("/patientDashboard/diagnosis-result");
     }
 
-    const allPrescription = [
-        { name: "Granny Prescription" },
-        { name: "Father's Prescription" },
-    ];
     const [symptoms, setSymptoms] = useState([]);
     const [searchResults, setSearchResults] = useState(symptomsArrays);
 
@@ -49,8 +41,8 @@ const DiagnosisForm = () => {
                             Describe your symptoms
                         </h1>
                         <p className="font-inter opacity-50 text-sm">
-                            Select from drop down symptoms that best describes
-                            your current condition.
+                            Select symptoms that best describes your current
+                            condition.
                         </p>
                     </section>
                     <input
@@ -61,9 +53,9 @@ const DiagnosisForm = () => {
                     />
                     <section
                         id="current-symptons"
-                        className="h-12  bg-[#1C1C1E] rounded-lg mt-5 border-secondary border-2"
+                        className=" bg-[#1C1C1E] rounded-lg mt-5 border-secondary border-2 py-2"
                     >
-                        <div className="flex gap-2 items-center h-full px-2">
+                        <div className="gap-2 items-center h-full px-2 flex">
                             {symptoms.map((symptom, index) => (
                                 <SelectedSymptom
                                     key={index}
@@ -73,36 +65,7 @@ const DiagnosisForm = () => {
                             ))}
                         </div>
                     </section>
-                    <section className="mt-6">
-                        <h1 className="font-white text-3xl font-bricolage font-bold">
-                            Upload Prescription
-                        </h1>
-                        <p className="font-inter opacity-50 text-sm mb-4">
-                            You can add any of your prescription to let doctor
-                            know about your past diagnosis
-                        </p>
 
-                        <Select
-                            placeholder="Select Prescription"
-                            variant="filled"
-                            bg="#1C1C1E"
-                            _hover={{ bg: "#2d2d30" }}
-                            ref={presRef}
-                        >
-                            {allPrescription.map((prescription, index) => (
-                                <option
-                                    key={index}
-                                    value={prescription.name}
-                                    style={{
-                                        backgroundColor: "#1C1C1E",
-                                        color: "white",
-                                    }}
-                                >
-                                    {prescription.name}
-                                </option>
-                            ))}
-                        </Select>
-                    </section>
                     <section className="mt-12">
                         <h1 className="font-white text-3xl font-bricolage font-bold">
                             Additional Notes
@@ -117,16 +80,16 @@ const DiagnosisForm = () => {
                             bg="#1C1C1E"
                             _hover={{ bg: "#2d2d30" }}
                             style={{
-                                fontFamily: "Inter",
-                                fontSize: "12px",
+                                height: "200px",
+                                resize: "none",
                             }}
-                            className="resize-none"
+                            className="font-bricolage"
                         />
                     </section>
-                    {/* Add Submit button */}
+
                     <button
                         onClick={handleSubmit}
-                        className="bg-secondary  font-bricolage opacity-65 font-bold text-sm px-5 py-3 rounded-lg mt-12 w-full hover:bg-[#5f5f6c] transition-colors"
+                        className="bg-secondary  font-bricolage opacity-65 font-bold text-lg px-5 py-3 rounded-lg mt-12 w-full hover:bg-[#5f5f6c] transition-colors"
                     >
                         Submit
                     </button>

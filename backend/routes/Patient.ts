@@ -7,4 +7,5 @@ app.get("/decode-token", checkPatient, (req, res) => {
 });
 
 
+
 export default app;

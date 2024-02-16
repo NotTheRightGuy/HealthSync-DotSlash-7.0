@@ -32,7 +32,7 @@ const Diagnosis = () => {
                     </div>
                     <div
                         onClick={() => {
-                            navigate("/patient/diagnosis-form");
+                            navigate("/patient/diagnosis/form");
                         }}
                         className="border-2 border-gray-800 rounded-2xl px-12 p-2 text-xs text-white opacity-80 hover:cursor-pointer hover:opacity-100 "
                     >
