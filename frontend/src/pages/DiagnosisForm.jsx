@@ -26,7 +26,7 @@ const DiagnosisForm = () => {
             additionalNotes: notesRef.current.value,
         };
         setDiagnosis(diagnosis);
-        navigate("/patientDashboard/diagnosis-result");
+        navigate("/patient/diagnosis/result");
     }
 
     const [symptoms, setSymptoms] = useState([]);

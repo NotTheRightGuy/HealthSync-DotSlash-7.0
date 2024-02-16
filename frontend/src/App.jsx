@@ -5,6 +5,7 @@ import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import PatientDashboard from "./pages/PatientDashboard.jsx";
 import DiagnosisForm from "./pages/DiagnosisForm.jsx";
+import DiagnosisResult from "./pages/DiagnosisResult.jsx";
 // Recoil
 import { RecoilRoot } from "recoil";
 // Chakra UI
@@ -27,6 +28,10 @@ function App() {
                             <Route
                                 path="/patient/diagnosis/form"
                                 element={<DiagnosisForm />}
+                            />
+                            <Route
+                                path="/patient/diagnosis/result"
+                                element={<DiagnosisResult />}
                             />
                         </Routes>
                     </Router>

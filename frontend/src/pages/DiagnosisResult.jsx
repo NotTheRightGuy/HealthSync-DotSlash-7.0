@@ -1,85 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { useQuery } from "react-query";
-import axios from "axios";
+import { useRecoilValue } from "recoil";
 import currentDiagnosis from "../recoil/currentDiagnosis";
 import currentUser from "../recoil/currentUser";
+import { SkeletonText } from "@chakra-ui/react";
 
 const DiagnosisResult = () => {
-    const [diagnosis] = useRecoilState(currentDiagnosis);
-    const [user] = useRecoilState(currentUser);
+    const diagnosis = useRecoilValue(currentDiagnosis);
+    const user = useRecoilValue(currentUser);
     const navigate = useNavigate();
-
     const [diagnosisResult, setDiagnosisResult] = useState({});
     const [feedback, setFeedback] = useState("");
 
-    function handleSubmit() {
-        const newDiagnosis = {
-            patientID: user._id,
-            symptoms: diagnosis.symptoms,
-            disease: diagnosisResult.prediction,
-            probability: diagnosisResult.confidence,
-            modelFeedback: feedback.response,
-            notes: diagnosis.additionalNotes,
-        };
-        axios
-            .post(
-                "http://localhost:3000/api/v1/diagnosis/upload",
-                newDiagnosis,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `${localStorage.getItem("token")}`,
-                    },
-                }
-            )
-            .then((res) => {
-                console.log(res.data);
-                navigate("/patientDashboard/diagnosis");
-            });
-    }
+    useEffect(() => {
+        console.log(user);
+        console.log(diagnosis);
+        fetch("http://localhost:5000/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: localStorage.getItem("token"),
+            },
+            body: JSON.stringify({
+                symptoms: diagnosis.symptoms,
+            }),
+        }).then(async (res) => {
+            const data = await res.json();
+            setDiagnosisResult(data);
+        });
+    }, []);
 
-    const { isLoading, error, data } = useQuery("diagnosisResult", () => {
-        axios
-            .post(
-                "http://localhost:3000/api/v1/diagnosis/predict",
-                {
-                    symptoms: diagnosis.symptoms,
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `${localStorage.getItem("token")}`,
-                    },
-                }
-            )
-            .then((res) => {
-                setDiagnosisResult(res.data);
-                const message = `I think I'm suffering ${res.data.prediction}. I have sent the diagnosis report to my doctor but in the mean time, 
-                I would like to get your feedback on this. What should I avoid during this time? Keep it concise and upto point. Don't repeat yourself
-                `;
-                axios
-                    .post(
-                        "http://localhost:3000/api/v1/diagnosis/chat",
-                        {
-                            message: message,
-                        },
-                        {
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: `${localStorage.getItem(
-                                    "token"
-                                )}`,
-                            },
-                        }
-                    )
-                    .then((res) => {
-                        setFeedback(res.data);
-                    });
-            });
-    });
+    function handleSubmit() {}
 
     return (
         <div className="flex justify-center items-center h-screen">
@@ -91,30 +43,25 @@ const DiagnosisResult = () => {
                             have
                         </p>
                         <h1 className="text-5xl font-bricolage mt-1">
-                            {isLoading
-                                ? "Loading..."
-                                : diagnosisResult.prediction}
+                            {diagnosisResult?.prediction}
                         </h1>
                         <p className="mt-6 text-xs opacity-55 font-inter">
                             We can say this with a certanity of
                         </p>
                         <h1 className="text-4xl font-bricolage mt-1 opacity-90">
-                            {isLoading
-                                ? "Loading..."
-                                : Math.round(diagnosisResult.confidence)}
-                            %
+                            {Math.round(diagnosisResult?.confidence)}%
                         </h1>
 
                         <h1 className="font-bricolage mt-6 text-5xl font-semibold opacity-85">
                             Feedback
                         </h1>
-                        <p className="mt-4 text-sm font-inter opacity-70">
+                        <div className="mt-4 text-sm font-inter opacity-70">
                             {feedback.length == 0 ? (
-                                <p>Loading...</p>
+                                <SkeletonText noOfLines={6} spacing="5" />
                             ) : (
                                 feedback.response
                             )}
-                        </p>
+                        </div>
 
                         <button
                             onClick={handleSubmit}
@@ -124,26 +71,6 @@ const DiagnosisResult = () => {
                         </button>
                     </main>
                 </section>
-                <div className="blur-md">
-                    <section className="bg-[#232328] border-l-2 border-secondary h-full p-10">
-                        <div className="bg-secondary w-full h-64 rounded-xl"></div>
-                        <div className="mt-5">
-                            <h1 className="font-white text-3xl font-bricolage font-bold">
-                                Diagnosis Result
-                            </h1>
-                            <p className="font-inter opacity-50 text-sm">
-                                Your doctor will provide his feedback soon.
-                            </p>
-                        </div>
-                    </section>
-                </div>
-                <div className="absolute w-fit h-fit text-sm text-center right-[15%] top-[45%] font-bricolage opacity-65">
-                    <FaLock className="ml-32 text-2xl" />
-                    <br />
-                    You will be able to access this section,
-                    <br />
-                    once your doctor has provided his feedback
-                </div>
             </main>
         </div>
     );

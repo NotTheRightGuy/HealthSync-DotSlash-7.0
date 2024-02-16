@@ -1,6 +1,7 @@
 import pickle
+model_path = './models/model.pkl'
 
-with open('model.pkl', 'rb') as f:
+with open(model_path, 'rb') as f:
     model = pickle.load(f)
 
 symptoms_dict = {
