@@ -3,9 +3,15 @@ import { atom } from "recoil";
 const currentUser = atom({
     key: "currentUser",
     default: {
-        _id: "",
+        email: "",
         firstName: "",
         lastName: "",
+        age: -1,
+        bloodGroup: "",
+        role: "",
+        address: "",
+        phone: "",
+        avatarUrl: "",
     },
 });
 

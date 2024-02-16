@@ -43,8 +43,9 @@ app.post('/patient/sign-up', async (req, res) => {
             });
 
             const {firstName, lastName, age, bloodGroup, address, phone} = req.body;
+            const avatarUrl = `https://api.dicebear.com/7.x/avataaars-neutral/svg?seed=${firstName}+${lastName}`
             const patientBody: patientBody = {
-                firstName, lastName, age, bloodGroup, address, phone
+                firstName, lastName, age, bloodGroup, address, phone, avatarUrl
             }
             const patient_valid = patient.safeParse(patientBody);
             if (patient_valid.success) {

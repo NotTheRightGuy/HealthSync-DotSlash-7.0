@@ -7,6 +7,7 @@ const Patient = prisma.patient;
 
 const checkPatient : RequestHandler = async (req, res, next ) => {
     const token = req.headers.authorization?.split(" ")[1];
+
     if (!token) {
         res.status(401).json({
             message: "Token Not Found, Authentication failed",

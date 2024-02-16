@@ -1,15 +1,17 @@
-import PatientDashboardNavbar from "../components/patientDashboardNavbar"
-export default function PatientDashboard(){
-    return(
-        <div className="bg-black h-screen">
+import PatientDashboardNavbar from "../components/patientDashboardNavbar";
+import Diagnosis from "../components/Diagnosis";
+import { useState } from "react";
+
+export default function PatientDashboard() {
+    const [currentSection, setCurrentSection] = useState("diagnosis");
+    return (
+        <div className="h-full">
             <PatientDashboardNavbar
-                links={[
-                    {name: "Diagnosis", path: "/patientDashboard/diagnosis"},
-                    {name: "Prescriptions", path: "/patientDashboard/prescriptions"},
-                    {name: "Your Doctor", path: "/patientDashboard/yourDoctor"},
-                    {name: "AI Chatbot", path: "/patientDashboard/chatbot"},
-                ]}
+                currentSection={currentSection}
+                setCurrentSection={setCurrentSection}
             />
+            <Diagnosis />
+            <div className="absolute bottom-0 w-screen h-4 border-t-2 border-secondary border-opacity-50"></div>
         </div>
-    )
+    );
 }

@@ -25,13 +25,15 @@ model Patient {
   bloodGroup String
   role       String @default("patient")
   address    String
-  phone      String    @unique
+  avatarUrl  String
+  phone      String @unique
 }
 
 model Doctor {
   id                  Int      @id
   firstName           String
   lastName            String
+  avatarUrl           String?
   age                 Int
   phone               String   @unique
   role                String   @default("doctor")
@@ -40,5 +42,5 @@ model Doctor {
   hospital            String
   experience_in_years Int
   expertise           String[] @default([])
-  patients_assigned   Int[] @default([])
+  patients_assigned   Int[]    @default([])
 }

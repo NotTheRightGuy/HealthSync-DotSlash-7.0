@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function DiagnosisCard(props) {
-    const [diagnosis, setDiagnosis] = useState({
+    const [diagnosis, _] = useState({
         id: props.id,
         disease: props.disease,
         date: props.date,

@@ -54,21 +54,21 @@ export default function SignUp() {
                         progress: undefined,
                     });
                 } else {
+                    toast.success(
+                        "Account created successfully, Redirecting you to Login",
+                        {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        }
+                    );
                     setTimeout(() => {
-                        toast.success(
-                            "Account created successfully, Redirecting you to Login",
-                            {
-                                position: "top-right",
-                                autoClose: 5000,
-                                hideProgressBar: false,
-                                closeOnClick: true,
-                                pauseOnHover: true,
-                                draggable: true,
-                                progress: undefined,
-                            }
-                        );
                         navigate("/auth/signin");
-                    }, 1000);
+                    }, 2000);
                 }
             });
     }

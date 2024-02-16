@@ -49,7 +49,7 @@ export default function Login() {
                         progress: undefined,
                     });
                 } else {
-                    localStorage.setItem("token", data.token);
+                    localStorage.setItem("token", "Bearer " + data.token);
                     toast.success("Logged in successfully", {
                         position: "top-right",
                         autoClose: 2000,

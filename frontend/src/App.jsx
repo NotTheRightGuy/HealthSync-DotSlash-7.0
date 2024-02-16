@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
+import PatientDashboard from "./pages/PatientDashboard.jsx";
 import { RecoilRoot } from "recoil";
 import { ChakraProvider } from "@chakra-ui/react";
 
@@ -15,6 +16,10 @@ function App() {
                             <Route path="/" element={<Home />}></Route>
                             <Route path="/auth/signin" element={<Login />} />
                             <Route path="/auth/signup" element={<SignUp />} />
+                            <Route
+                                path="/patient/dashboard"
+                                element={<PatientDashboard />}
+                            />
                         </Routes>
                     </Router>
                 </div>

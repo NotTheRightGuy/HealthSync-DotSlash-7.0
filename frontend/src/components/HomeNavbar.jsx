@@ -52,13 +52,25 @@ function Navbar() {
                         >
                             <FaGithub size={30}></FaGithub>
                         </a>
-                        <div
-                            className="border-2 border-white px-2 py-1 rounded-xl cursor-pointer"
-                            onClick={() => navigate("/auth/signin")}
-                        >
-                            {" "}
-                            Get Started{" "}
-                        </div>
+                        {localStorage.getItem("token") ? (
+                            <div
+                                className="border-2 border-white px-2 py-1 rounded-xl cursor-pointer"
+                                onClick={() => {
+                                    navigate("/patient/dashboard");
+                                }}
+                            >
+                                {" "}
+                                Dashboard{" "}
+                            </div>
+                        ) : (
+                            <div
+                                className="border-2 border-white px-2 py-1 rounded-xl cursor-pointer"
+                                onClick={() => navigate("/auth/signin")}
+                            >
+                                {" "}
+                                Get Started{" "}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

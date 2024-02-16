@@ -1,53 +1,95 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CiMenuKebab } from "react-icons/ci";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import currentUser from "../recoil/currentUser";
 
-export default function PatientDashboardNavbar(props) {
-    const [currComponent, setCurrComponent] = useState("Diagnosis");
+export default function PatientDashboardNavbar({
+    currentSection,
+    setCurrentSection,
+}) {
     const navigate = useNavigate();
+    const diagnosisClassName = `cursor-pointer ${
+        currentSection === "diagnosis" ? "opacity-90" : "opacity-50"
+    }`;
+    const prescriptionClassName = `cursor-pointer ${
+        currentSection === "prescription" ? "opacity-90" : "opacity-50"
+    }`;
+    const chatbotClassName = `cursor-pointer ${
+        currentSection === "chatbot" ? "opacity-90" : "opacity-50"
+    }`;
 
-    const changeComponent = (e) => {
-        navigate(e.target.attributes.name.value);
-    };
+    const [currentUserState, setCurrentUser] = useRecoilState(currentUser);
+    const token = localStorage.getItem("token");
+    useEffect(() => {
+        fetch("http://localhost:3000/api/v1/patient/decode-token", {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setCurrentUser(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     return (
         <div className="">
             <div className="flex justify-between px-10 py-3 font-normal items-center">
-                <a href="/">
-                    <div className="font-bricolage text-2xl cursor-pointer">
-                        Health
-                        <span className="font-medium">Sync </span>
-                    </div>
-                </a>
+                <div
+                    className="font-bricolage text-2xl cursor-pointer"
+                    onClick={() => navigate("/")}
+                >
+                    Health
+                    <span className="font-medium">Sync</span>
+                </div>
 
-                <div className="flex gap-8 text-base">
-                    {props.links.map((link) => {
-                        return (
-                            <div
-                                key={link.path}
-                                className={
-                                    props.currPage === link.name
-                                        ? "font-medium text-white h-fit cursor-pointer "
-                                        : "text-white opacity-65 hover:opacity-100 h-fit cursor-pointer "
-                                }
-                                onClick={changeComponent}
-                                name={link.path}
-                            >
-                                {link.name}
-                            </div>
-                        );
-                    })}
+                <div className="flex justify-center gap-8 font-bricolage">
+                    <p
+                        className={diagnosisClassName}
+                        onClick={() => {
+                            setCurrentSection("diagnosis");
+                            // navigate("/patient/dashboard");
+                        }}
+                    >
+                        Diagnosis
+                    </p>
+                    <p
+                        className={prescriptionClassName}
+                        onClick={() => {
+                            setCurrentSection("prescription");
+                            // navigate("/patient/prescription");
+                        }}
+                    >
+                        Prescription
+                    </p>
+                    <p
+                        className={chatbotClassName}
+                        onClick={() => {
+                            setCurrentSection("chatbot");
+                            // navigate("/patient/chatbot");
+                        }}
+                    >
+                        Mrs. Winnie
+                    </p>
                 </div>
                 <div className="user">
-                    <div className="flex p-3 rounded-2xl border-2 border-[#0f0f11]">
+                    <div className="flex p-2 rounded-2xl border-2 border-[#0f0f11]">
                         <div className="flex gap-5 items-center">
-                            <div className="rounded-2xl bg-gray-300">
-                                <div className="h-10 w-10 bg-gradient-to-b from-[#d13636] to-[#d9d9d9] rounded-xl"></div>
-                            </div>
+                            <img
+                                src={currentUserState.avatarUrl}
+                                alt="user"
+                                className="rounded-2xl h-10 w-10"
+                            />
+
                             <div className="font-medium opacity-65">
-                                John Doe
+                                {currentUserState.firstName +
+                                    " " +
+                                    currentUserState.lastName}
                             </div>
-                            <CiMenuKebab className="text-secondary" />
                         </div>
                     </div>
                 </div>

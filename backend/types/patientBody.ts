@@ -4,7 +4,8 @@ type patientBody = {
     age: number,
     bloodGroup: string,
     address: string,
-    phone: string
+    phone: string,
+    avatarUrl: string
 }
 
 export default patientBody;
