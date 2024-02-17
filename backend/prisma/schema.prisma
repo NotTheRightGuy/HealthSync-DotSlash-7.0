@@ -55,3 +55,12 @@ model Diagnosis {
   medicines            String[]
   prescriptionURL      String
 }
+
+model Prescription {
+  id                      Int      @id @default(autoincrement())
+  patientID               Int
+  prescriptionURL         String
+  prescriptionName        String
+  prescriptionDescription String
+  prescriptionDate        DateTime @default(now())
+}
