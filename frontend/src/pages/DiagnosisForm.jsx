@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import SelectedSymptom from "../components/selectedSymptom";
+import SelectedSymptom from "../components/SelectedSymptom";
 import symptomsArrays from "../utils/symptomWithId";
 import { Textarea } from "@chakra-ui/react";
 import currentDiagnosis from "../recoil/currentDiagnosis";

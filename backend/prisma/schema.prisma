@@ -44,3 +44,14 @@ model Doctor {
   expertise           String[] @default([])
   patients_assigned   Int[]    @default([])
 }
+
+model Diagnosis {
+  id                   Int      @id @default(autoincrement())
+  patientID            Int
+  diagnosis_name       String
+  diagnosis_confidence Int
+  diagnosis_date       DateTime @default(now())
+  feedback             String[]
+  medicines            String[]
+  prescriptionURL      String
+}

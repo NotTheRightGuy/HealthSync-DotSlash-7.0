@@ -7,58 +7,50 @@ export default function DiagnosisCard(props) {
         disease: props.disease,
         date: props.date,
         probability: props.probability,
-        symptoms: props.symptoms,
-        remark: props.remark,
-        needFeedback: props.needFeedback,
+        feedback: props.feedback,
     });
-
+    const formatedDate = new Date(diagnosis.date).toDateString();
+    const feedback_array = diagnosis.feedback;
     const navigate = useNavigate();
 
     return (
         <div
             className="bg-[#0f0f11] rounded-3xl w-72 border-[1px] border-[#bfbfbf] font-inter hover:cursor-pointer"
             onClick={() => {
-                navigate(`/patientDashboard/diagnosis-result/${diagnosis.id}`);
+                navigate(`/patient/diagnosis/id/${diagnosis.id}`);
             }}
         >
-            <div className="px-5 py-3 flex-col justify-between text-3xl font-medium h-24 font-bricolage">
+            <div className="px-5 py-3 flex-col justify-between text-3xl font-medium font-bricolage">
                 {diagnosis.disease}
                 <div className="text-2xl font-medium text-gray-300 opacity-45">
                     {Math.round(diagnosis.probability)}%
                 </div>
             </div>
+            <div className="border-t-2 border-[#bfbfbf] border-opacity-50" />
+            <div className="px-5 py-3">
+                <p className="text-sm font-medium opacity-50">
+                    {feedback_array.map((feedback, index) => {
+                        return (
+                            <span key={index}>
+                                {feedback}
+                                <br />
+                            </span>
+                        );
+                    })}
+                </p>
+            </div>
             <hr className="opacity-50" />
-            <div className="px-6 py-3">
-                <p className="text-xs font-medium opacity-75 ">
-                    Diagnosed on {diagnosis.date}
+            <div className="px-5 py-2">
+                <p className="text-sm font-medium opacity-50">
+                    Diagnosed on {formatedDate}
                 </p>
-                <ul className="mt-2 mb-4 text-white font-bricolage font-bold">
-                    Listed Symptoms
-                </ul>
 
-                {diagnosis.symptoms.map((symptom) => {
-                    return (
-                        <li
-                            className="text-sm opacity-75 px-2"
-                            key={Math.random()}
-                        >
-                            {symptom}
-                        </li>
-                    );
-                })}
-
-                <p className="text-xl font-medium mt-10 text-white font-bricolage">
-                    Doctor's Remark
-                </p>
-                {diagnosis.needFeedback ? (
-                    <p className="text-sm font-inter text-yellow-300 font-medium">
-                        Awaiting Doctor Check
-                    </p>
-                ) : (
-                    <p className="text-sm font-inter text-green-300 font-medium">
-                        Doctor Check Completed, Click to view
-                    </p>
-                )}
+                <div className="flex justify-between items-center mt-2">
+                    <div className="text-xs font-medium opacity-40">
+                        View Details
+                    </div>
+                    <div className="text-xs font-medium opacity-75">→</div>
+                </div>
             </div>
         </div>
     );

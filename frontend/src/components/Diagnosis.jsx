@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Gears from "../assets/Gears.svg";
 import medDoc from "../assets/Medical Doctor.svg";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,23 @@ import DiagnosisCard from "./diagnosisCard";
 const Diagnosis = () => {
     const [diagnosis, setDiagnosis] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch("http://localhost:3000/api/v1/patient/get-diagnosis", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: localStorage.getItem("token"),
+            },
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                setDiagnosis(data.diagnosis);
+            });
+    }, []);
+
     if (diagnosis.length === 0) {
         return (
             <div className="mt-52">
@@ -43,23 +60,31 @@ const Diagnosis = () => {
         );
     } else {
         return (
-            <div className="mt-20">
-                <div className="flex flex-col gap-10 items-center">
+            <div className="mt-2">
+                <div className="p-10 grid gap-80 grid-cols-6">
                     {diagnosis.map((diagnosis) => {
                         return (
                             <DiagnosisCard
                                 key={diagnosis.id}
                                 id={diagnosis.id}
-                                disease={diagnosis.disease}
-                                date={diagnosis.date}
-                                probability={diagnosis.probability}
-                                symptoms={diagnosis.symptoms}
-                                remark={diagnosis.remark}
-                                needFeedback={diagnosis.needFeedback}
+                                disease={diagnosis.diagnosis_name}
+                                date={diagnosis.diagnosis_date}
+                                probability={diagnosis.diagnosis_confidence}
+                                feedback={diagnosis.feedback}
                             />
                         );
                     })}
                 </div>
+                <button className="absolute bottom-8 right-4">
+                    <div
+                        onClick={() => {
+                            navigate("/patient/diagnosis/form");
+                        }}
+                        className="border-2 border-gray-800 rounded-2xl px-12 p-2 text-xs text-white opacity-80 hover:cursor-pointer hover:opacity-100 "
+                    >
+                        Make Diagnosis
+                    </div>
+                </button>
             </div>
         );
     }

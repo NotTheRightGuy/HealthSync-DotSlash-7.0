@@ -14,9 +14,6 @@ export default function PatientDashboardNavbar({
     const prescriptionClassName = `cursor-pointer ${
         currentSection === "prescription" ? "opacity-90" : "opacity-50"
     }`;
-    const chatbotClassName = `cursor-pointer ${
-        currentSection === "chatbot" ? "opacity-90" : "opacity-50"
-    }`;
 
     const [currentUserState, setCurrentUser] = useRecoilState(currentUser);
     const token = localStorage.getItem("token");
@@ -52,7 +49,6 @@ export default function PatientDashboardNavbar({
                         className={diagnosisClassName}
                         onClick={() => {
                             setCurrentSection("diagnosis");
-                            // navigate("/patient/dashboard");
                         }}
                     >
                         Diagnosis
@@ -61,19 +57,9 @@ export default function PatientDashboardNavbar({
                         className={prescriptionClassName}
                         onClick={() => {
                             setCurrentSection("prescription");
-                            // navigate("/patient/prescription");
                         }}
                     >
                         Prescription
-                    </p>
-                    <p
-                        className={chatbotClassName}
-                        onClick={() => {
-                            setCurrentSection("chatbot");
-                            // navigate("/patient/chatbot");
-                        }}
-                    >
-                        Mrs. Winnie
                     </p>
                 </div>
                 <div className="user">
