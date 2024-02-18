@@ -1,9 +1,6 @@
 import { FaGithub } from "react-icons/fa6";
-import PatientDashboardImg from "../assets/PatientDashboard.svg";
-import Grad from "../assets/Hero Shape.svg";
-import Graph from "../assets/Graph.svg";
-import Gears2 from "../assets/Gears2.svg";
-import Robot from "../assets/Robot.svg";
+// import PatientDashboardImg from "../assets/PatientDashboard.svg";
+
 import { useNavigate } from "react-router";
 import HomeNavbar from "../components/HomeNavbar";
 

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Eye from "../assets/eye.svg";
 import LifeSavers from "../assets/Lifesavers.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,13 +28,16 @@ export default function Login() {
             email,
             password,
         };
-        fetch("http://localhost:3000/api/v1/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(toSend),
-        })
+        fetch(
+            "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/auth/login",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(toSend),
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 if (data.err) {

@@ -9,13 +9,16 @@ const DiagnosisWithID = () => {
     const { id } = useParams();
     const [diagnosis, setDiagnosis] = useState({});
     useEffect(() => {
-        fetch(`http://localhost:3000/api/v1/patient/diagnosis/${id}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: localStorage.getItem("token"),
-            },
-        })
+        fetch(
+            `ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/diagnosis/${id}`,
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: localStorage.getItem("token"),
+                },
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);

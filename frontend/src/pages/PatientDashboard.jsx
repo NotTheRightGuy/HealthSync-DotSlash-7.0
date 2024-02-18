@@ -1,4 +1,4 @@
-import PatientDashboardNavbar from "../components/patientDashboardNavbar";
+import PatientDashboardNavbar from "../components/PatientDashboardNavbar";
 import Diagnosis from "../components/Diagnosis";
 import Prescriptions from "../components/Prescriptions";
 import { useState } from "react";

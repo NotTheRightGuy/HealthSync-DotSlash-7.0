@@ -34,13 +34,16 @@ export default function SignUp() {
             password,
         };
 
-        fetch("http://localhost:3000/api/v1/auth/patient/sign-up", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(toSend),
-        })
+        fetch(
+            "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/auth/patient/sign-up",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(toSend),
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 if (data.err) {

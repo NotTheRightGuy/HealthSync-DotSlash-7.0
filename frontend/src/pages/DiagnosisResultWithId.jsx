@@ -11,12 +11,15 @@ const DiagnosisResultWithId = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:3000/api/v1/diagnosis/get/${diagnosisID}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `${localStorage.getItem("token")}`,
-                },
-            })
+            .get(
+                `ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/diagnosis/get/${diagnosisID}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `${localStorage.getItem("token")}`,
+                    },
+                }
+            )
             .then((res) => {
                 console.log(res.data);
                 setDiagnosis(res.data.diagnosis);

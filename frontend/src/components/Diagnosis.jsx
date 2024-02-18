@@ -1,20 +1,23 @@
 import { useState, useEffect } from "react";
-import Gears from "../assets/Gears.svg";
-import medDoc from "../assets/Medical Doctor.svg";
+import Gears from "../assets/Gears.png";
+import medDoc from "../assets/Medical Doctor.png";
 import { useNavigate } from "react-router-dom";
-import DiagnosisCard from "./diagnosisCard";
+import DiagnosisCard from "./DiagnosisCard";
 const Diagnosis = () => {
     const [diagnosis, setDiagnosis] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/v1/patient/get-diagnosis", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: localStorage.getItem("token"),
-            },
-        })
+        fetch(
+            "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/get-diagnosis",
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: localStorage.getItem("token"),
+                },
+            }
+        )
             .then((res) => {
                 return res.json();
             })

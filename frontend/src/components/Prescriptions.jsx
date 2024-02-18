@@ -1,4 +1,4 @@
-import finDocs from "../assets/financial documents.svg";
+import finDocs from "../assets/financial documents.png";
 import { motion } from "framer-motion";
 import { IoClose } from "react-icons/io5";
 import { useState, useRef, useEffect } from "react";
@@ -14,7 +14,7 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 
 // Components
-import PrescriptionCard from "./prescriptionCard";
+import PrescriptionCard from "./PrescriptionCard";
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
@@ -25,7 +25,7 @@ export default function Prescriptions() {
     useEffect(() => {
         const fetchData = async () => {
             const rawData = await fetch(
-                "http://localhost:3000/api/v1/prescription/get-all",
+                "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/prescription/get-all",
                 {
                     method: "GET",
                     headers: {
@@ -141,7 +141,7 @@ const FileUploadComponent = () => {
                         prescriptionDescriptionRef.current.value;
 
                     const rawData = await fetch(
-                        "http://localhost:3000/api/v1/prescription/upload",
+                        "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/prescription/upload",
                         {
                             method: "POST",
                             headers: {
