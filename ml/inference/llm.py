@@ -29,7 +29,7 @@ def generate_feedback(diagnosis):
     llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model="gpt-3.5-turbo")
     chain = prompt | llm
 
-    raw_feedback = chain.invoke({"diagnosis": "Dengue"})
+    raw_feedback = chain.invoke({"diagnosis": "Dengue"}).content
     feedback = raw_feedback.split("00MEDS00")[0].strip()
     medicines = raw_feedback.split("00MEDS00")[1].strip()
     feedback_array = feedback.split("<next>")
