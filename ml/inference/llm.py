@@ -1,4 +1,4 @@
-from langchain_openai import OpenAI
+from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 load_dotenv()
@@ -26,7 +26,7 @@ def generate_feedback(diagnosis):
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     
 
-    llm = OpenAI(openai_api_key=OPENAI_API_KEY)
+    llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model="gpt-3.5-turbo")
     chain = prompt | llm
 
     raw_feedback = chain.invoke({"diagnosis": "Dengue"})
