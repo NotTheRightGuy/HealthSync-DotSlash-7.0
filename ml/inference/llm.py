@@ -1,5 +1,8 @@
-from langchain_community.llms import Ollama
+from langchain_openai import OpenAI
 from langchain_core.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 
 def generate_feedback(diagnosis):
@@ -20,7 +23,9 @@ def generate_feedback(diagnosis):
         """
     )
 
-    llm = Ollama(model="mistral")
+    OPENAI_KEY = os.getenv("OPENAI_KEY")
+
+    llm = OpenAI(openai_api_key=OPENAI_KEY, model="gpt-3.5-turbo")
     chain = prompt | llm
 
     raw_feedback = chain.invoke({"diagnosis": "Dengue"})
@@ -29,5 +34,3 @@ def generate_feedback(diagnosis):
     feedback_array = feedback.split("<next>")
     medicine_array = medicines.split("<next>")
     return [feedback_array, medicine_array]
-
-

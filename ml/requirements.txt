@@ -6,3 +6,4 @@ Pillow
 python-dotenv
 cloudinary
 langchain-community
+langchain-openai
