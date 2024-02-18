@@ -19,7 +19,7 @@ export default function PatientDashboardNavbar({
     const token = localStorage.getItem("token");
     useEffect(() => {
         fetch(
-            "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/decode-token",
+            "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/decode-token",
             {
                 headers: {
                     "Content-Type": "application/json",

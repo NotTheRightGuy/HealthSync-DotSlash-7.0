@@ -28,7 +28,7 @@ const DiagnosisResult = () => {
                 // Fetch diagnosis prediction
                 console.log("Starting Diagnosis");
                 const predictResponse = await fetch(
-                    "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:5000/predict",
+                    "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:5000/predict",
                     {
                         method: "POST",
                         headers: {
@@ -44,7 +44,7 @@ const DiagnosisResult = () => {
                 setDiagnosisResult(predictData);
                 // Fetch feedback and medicines
                 const feedbackResponse = await fetch(
-                    "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:5000/generate-feedback",
+                    "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:5000/generate-feedback",
                     {
                         method: "POST",
                         headers: {
@@ -61,7 +61,7 @@ const DiagnosisResult = () => {
                 setMedicines(feedbackData.medicine);
 
                 const prescriptionResponse = await fetch(
-                    "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:5000/create-prescription",
+                    "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:5000/create-prescription",
                     {
                         method: "POST",
                         headers: {
@@ -95,7 +95,7 @@ const DiagnosisResult = () => {
     async function handleSubmit() {
         try {
             const response = await fetch(
-                "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/save-diagnosis",
+                "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/save-diagnosis",
                 {
                     method: "POST",
                     headers: {

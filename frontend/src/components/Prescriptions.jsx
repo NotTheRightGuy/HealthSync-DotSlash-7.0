@@ -25,7 +25,7 @@ export default function Prescriptions() {
     useEffect(() => {
         const fetchData = async () => {
             const rawData = await fetch(
-                "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/prescription/get-all",
+                "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/prescription/get-all",
                 {
                     method: "GET",
                     headers: {
@@ -141,7 +141,7 @@ const FileUploadComponent = () => {
                         prescriptionDescriptionRef.current.value;
 
                     const rawData = await fetch(
-                        "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/prescription/upload",
+                        "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/prescription/upload",
                         {
                             method: "POST",
                             headers: {

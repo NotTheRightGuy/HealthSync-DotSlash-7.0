@@ -35,7 +35,7 @@ export default function SignUp() {
         };
 
         fetch(
-            "ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/auth/patient/sign-up",
+            "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/auth/patient/sign-up",
             {
                 method: "POST",
                 headers: {

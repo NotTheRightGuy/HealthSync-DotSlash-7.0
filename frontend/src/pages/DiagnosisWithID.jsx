@@ -10,7 +10,7 @@ const DiagnosisWithID = () => {
     const [diagnosis, setDiagnosis] = useState({});
     useEffect(() => {
         fetch(
-            `ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/diagnosis/${id}`,
+            `http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/diagnosis/${id}`,
             {
                 method: "GET",
                 headers: {
