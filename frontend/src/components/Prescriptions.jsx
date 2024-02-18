@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { MdAdd } from "react-icons/md";
 import "react-toastify/dist/ReactToastify.css";
+import URL from "../URL";
 
 // Filepond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -25,7 +26,7 @@ export default function Prescriptions() {
     useEffect(() => {
         const fetchData = async () => {
             const rawData = await fetch(
-                "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/prescription/get-all",
+                `${URL}:3000/api/v1/prescription/get-all`,
                 {
                     method: "GET",
                     headers: {
@@ -141,7 +142,7 @@ const FileUploadComponent = () => {
                         prescriptionDescriptionRef.current.value;
 
                     const rawData = await fetch(
-                        "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/prescription/upload",
+                        `${URL}:3000/api/v1/prescription/upload`,
                         {
                             method: "POST",
                             headers: {

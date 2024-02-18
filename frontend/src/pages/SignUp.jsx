@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import URL from "../URL";
 export default function SignUp() {
     const navigate = useNavigate();
     const firstNameRef = useRef();
@@ -34,16 +35,13 @@ export default function SignUp() {
             password,
         };
 
-        fetch(
-            "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/auth/patient/sign-up",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(toSend),
-            }
-        )
+        fetch(`${URL}:3000/api/v1/auth/patient/sign-up`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(toSend),
+        })
             .then((res) => res.json())
             .then((data) => {
                 if (data.err) {

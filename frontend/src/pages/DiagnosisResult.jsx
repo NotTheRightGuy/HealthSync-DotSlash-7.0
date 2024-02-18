@@ -7,6 +7,7 @@ import currentUser from "../recoil/currentUser";
 import { GiMedicines } from "react-icons/gi";
 import { SkeletonText } from "@chakra-ui/react";
 import { saveAs } from "file-saver";
+import URL from "../URL";
 
 const DiagnosisResult = () => {
     const diagnosis = useRecoilValue(currentDiagnosis);
@@ -27,24 +28,21 @@ const DiagnosisResult = () => {
             try {
                 // Fetch diagnosis prediction
                 console.log("Starting Diagnosis");
-                const predictResponse = await fetch(
-                    "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:5000/predict",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: localStorage.getItem("token"),
-                        },
-                        body: JSON.stringify({
-                            symptoms: diagnosis.symptoms,
-                        }),
-                    }
-                );
+                const predictResponse = await fetch(`${URL}:5000/predict`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: localStorage.getItem("token"),
+                    },
+                    body: JSON.stringify({
+                        symptoms: diagnosis.symptoms,
+                    }),
+                });
                 const predictData = await predictResponse.json();
                 setDiagnosisResult(predictData);
                 // Fetch feedback and medicines
                 const feedbackResponse = await fetch(
-                    "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:5000/generate-feedback",
+                    `${URL}:5000/generate-feedback`,
                     {
                         method: "POST",
                         headers: {
@@ -61,7 +59,7 @@ const DiagnosisResult = () => {
                 setMedicines(feedbackData.medicine);
 
                 const prescriptionResponse = await fetch(
-                    "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:5000/create-prescription",
+                    `${URL}:5000/create-prescription`,
                     {
                         method: "POST",
                         headers: {
@@ -95,7 +93,7 @@ const DiagnosisResult = () => {
     async function handleSubmit() {
         try {
             const response = await fetch(
-                "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/save-diagnosis",
+                `${URL}:3000/api/v1/patient/save-diagnosis`,
                 {
                     method: "POST",
                     headers: {

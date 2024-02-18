@@ -1,24 +1,21 @@
-import { GiMedicines } from "react-icons/gi";
 import { SkeletonText } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { saveAs } from "file-saver";
+import URL from "../URL";
 
 const DiagnosisWithID = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [diagnosis, setDiagnosis] = useState({});
     useEffect(() => {
-        fetch(
-            `http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/diagnosis/${id}`,
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: localStorage.getItem("token"),
-                },
-            }
-        )
+        fetch(`${URL}:3000/api/v1/patient/diagnosis/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: localStorage.getItem("token"),
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);

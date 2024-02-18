@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import currentUser from "../recoil/currentUser";
+import URL from "../URL";
 
 export default function PatientDashboardNavbar({
     currentSection,
@@ -18,15 +19,12 @@ export default function PatientDashboardNavbar({
     const [currentUserState, setCurrentUser] = useRecoilState(currentUser);
     const token = localStorage.getItem("token");
     useEffect(() => {
-        fetch(
-            "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/decode-token",
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: token,
-                },
-            }
-        )
+        fetch(`${URL}:3000/api/v1/patient/decode-token`, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 setCurrentUser(data);

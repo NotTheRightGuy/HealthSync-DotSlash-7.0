@@ -3,21 +3,19 @@ import Gears from "../assets/Gears.png";
 import medDoc from "../assets/Medical Doctor.png";
 import { useNavigate } from "react-router-dom";
 import DiagnosisCard from "./DiagnosisCard";
+import URL from "../URL";
 const Diagnosis = () => {
     const [diagnosis, setDiagnosis] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(
-            "http://ec2-52-66-237-98.ap-south-1.compute.amazonaws.com:3000/api/v1/patient/get-diagnosis",
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: localStorage.getItem("token"),
-                },
-            }
-        )
+        fetch(`${URL}:3000/api/v1/patient/get-diagnosis`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: localStorage.getItem("token"),
+            },
+        })
             .then((res) => {
                 return res.json();
             })
