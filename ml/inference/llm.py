@@ -26,7 +26,7 @@ def generate_feedback(diagnosis):
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     
 
-    llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model="gpt-3.5-turbo")
+    llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model_name="gpt-3.5-turbo-0125")
     chain = prompt | llm
 
     raw_feedback = chain.invoke({"diagnosis": "Dengue"}).content
