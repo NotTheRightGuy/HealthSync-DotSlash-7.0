@@ -9,7 +9,7 @@ const Diagnosis = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`${URL}:3000/api/v1/patient/get-diagnosis`, {
+        fetch(`${URL}/api/v1/patient/get-diagnosis`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

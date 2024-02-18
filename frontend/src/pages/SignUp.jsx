@@ -35,7 +35,7 @@ export default function SignUp() {
             password,
         };
 
-        fetch(`${URL}:3000/api/v1/auth/patient/sign-up`, {
+        fetch(`${URL}/api/v1/auth/patient/sign-up`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -19,7 +19,7 @@ export default function PatientDashboardNavbar({
     const [currentUserState, setCurrentUser] = useRecoilState(currentUser);
     const token = localStorage.getItem("token");
     useEffect(() => {
-        fetch(`${URL}:3000/api/v1/patient/decode-token`, {
+        fetch(`${URL}/api/v1/patient/decode-token`, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: token,

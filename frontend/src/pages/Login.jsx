@@ -30,7 +30,7 @@ export default function Login() {
             email,
             password,
         };
-        fetch(`${URL}:3000/api/v1/auth/login`, {
+        fetch(`${URL}/api/v1/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

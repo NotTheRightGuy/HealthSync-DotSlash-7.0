@@ -93,7 +93,7 @@ const DiagnosisResult = () => {
     async function handleSubmit() {
         try {
             const response = await fetch(
-                `${URL}:3000/api/v1/patient/save-diagnosis`,
+                `${URL}/api/v1/patient/save-diagnosis`,
                 {
                     method: "POST",
                     headers: {

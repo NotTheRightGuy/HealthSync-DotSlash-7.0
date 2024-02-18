@@ -9,7 +9,7 @@ const DiagnosisWithID = () => {
     const { id } = useParams();
     const [diagnosis, setDiagnosis] = useState({});
     useEffect(() => {
-        fetch(`${URL}:3000/api/v1/patient/diagnosis/${id}`, {
+        fetch(`${URL}/api/v1/patient/diagnosis/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

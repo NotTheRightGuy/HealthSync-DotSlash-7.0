@@ -25,16 +25,13 @@ export default function Prescriptions() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const rawData = await fetch(
-                `${URL}:3000/api/v1/prescription/get-all`,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: localStorage.getItem("token"),
-                    },
-                }
-            );
+            const rawData = await fetch(`${URL}/api/v1/prescription/get-all`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: localStorage.getItem("token"),
+                },
+            });
 
             const response = await rawData.json();
             setPrescriptions(response);
@@ -142,7 +139,7 @@ const FileUploadComponent = () => {
                         prescriptionDescriptionRef.current.value;
 
                     const rawData = await fetch(
-                        `${URL}:3000/api/v1/prescription/upload`,
+                        `${URL}/api/v1/prescription/upload`,
                         {
                             method: "POST",
                             headers: {
