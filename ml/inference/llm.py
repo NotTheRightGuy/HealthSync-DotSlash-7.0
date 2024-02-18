@@ -23,9 +23,10 @@ def generate_feedback(diagnosis):
         """
     )
 
-    OPENAI_KEY = os.getenv("OPENAI_KEY")
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    
 
-    llm = OpenAI(openai_api_key=OPENAI_KEY, model="gpt-3.5-turbo")
+    llm = OpenAI(openai_api_key=OPENAI_API_KEY)
     chain = prompt | llm
 
     raw_feedback = chain.invoke({"diagnosis": "Dengue"})
