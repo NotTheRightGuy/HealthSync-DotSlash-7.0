@@ -28,21 +28,24 @@ const DiagnosisResult = () => {
             try {
                 // Fetch diagnosis prediction
                 console.log("Starting Diagnosis");
-                const predictResponse = await fetch(`${URL}:5000/predict`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: localStorage.getItem("token"),
-                    },
-                    body: JSON.stringify({
-                        symptoms: diagnosis.symptoms,
-                    }),
-                });
+                const predictResponse = await fetch(
+                    `${URL}/api/v1/ml/predict`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: localStorage.getItem("token"),
+                        },
+                        body: JSON.stringify({
+                            symptoms: diagnosis.symptoms,
+                        }),
+                    }
+                );
                 const predictData = await predictResponse.json();
                 setDiagnosisResult(predictData);
                 // Fetch feedback and medicines
                 const feedbackResponse = await fetch(
-                    `${URL}:5000/generate-feedback`,
+                    `${URL}/api/v1/ml/generate-feedback`,
                     {
                         method: "POST",
                         headers: {
@@ -59,7 +62,7 @@ const DiagnosisResult = () => {
                 setMedicines(feedbackData.medicine);
 
                 const prescriptionResponse = await fetch(
-                    `${URL}:5000/create-prescription`,
+                    `${URL}/api/v1/ml/create-prescription`,
                     {
                         method: "POST",
                         headers: {
