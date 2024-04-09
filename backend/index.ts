@@ -8,9 +8,7 @@ import logger from "./middlewares/logger";
 
 const app = express();
 
-app.use(cors({
-    origin:"https://healthysync.life/*"
-}));
+app.use(cors());
 app.use(express.json());
 app.use(logger);
 app.use("/api/v1", routes);
